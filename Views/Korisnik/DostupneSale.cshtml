@@ -1,0 +1,127 @@
+﻿@model KosSala.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "DostupneSale";
+    Layout = "~/Views/Shared/_LayoutKorisnik.cshtml";
+}
+
+
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+        <script type="text/javascript" src="~/Content/Datatables/jquery.dataTables.min.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+
+        
+
+    </head>
+
+
+
+<body>
+    <<div class="container">
+        <div class="card border-0 shadow my-5">
+            <div class="card-body p-5">
+
+                <h2>Lista dostupnih sala</h2>
+
+
+
+                <table id="myTable" class="display table table-striped table-light table-responsive-xl" style="width:100%">
+                    <thead class="thead-dark">
+                        <tr>
+
+
+                            <th>Slika </th>
+                            <th>Naziv </th>
+                            <th>Lokacija</th>
+                            <th>Rejting </th>
+                            <th>Upravnik ime</th>
+                            <th>Upravnik prezime</th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    <tfoot class="thead-dark">
+                        <tr>
+
+                            <th>Slika </th>
+                            <th>Naziv </th>
+                            <th>Lokacija</th>
+                            <th>Rejting </th>
+                            <th>Upravnik ime</th>
+                            <th>Upravnik prezime</th>
+                            <th></th>
+
+                        </tr>
+                    </tfoot>
+            </div>
+        </div>
+</body>
+
+
+<!--Obican izgled tabele:     //cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet  -->
+
+<link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+@section scripts{
+    <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            var table = $('#myTable').DataTable({
+                "ajax": {
+                    "url": "/Korisnik/SveSale",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+
+                    {
+                        data: "SlikaString", "autoWidth": true, "render": function (data) {
+
+                            return '<img src="' + data + '" width="45" height="45"  />'
+
+                        }
+                    },
+                    { "data": "Naziv", "autoWidth": true },
+                    { "data": "Lokacija", "autoWidth": true },
+                    { "data": "Rejting", "render": function (data, type, full) { return data.toString().match(/\d+(\.\d{1,2})?/g)[0] } },
+                    { "data": "ImeUpravnika", "autoWidth": true },
+                    { "data": "PrezimeUpravnika", "autoWidth": true },
+                    { "defaultContent": "<button class=" + "btn btn-secondary btn-sm" + ">Profil</button>" }
+
+                ], "order": [[2, 'asc']]
+
+            });
+            $('#myTable tbody').on('click', 'button', function () {
+
+                var data = table.row($(this).parents('tr')).data();
+                var url = "/Korisnik/SalaProfile/" + data.SalaId;
+
+                window.location.href = url;
+            });
+        });
+
+
+    </script>
+
+}
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutKorisnik.cshtml";
+}
+<style>
+    
+
+    .table td {
+        vertical-align: middle;
+        font-size: 20px;
+        font-family: Bahnschrift;
+    }
+</style>

@@ -1,0 +1,28 @@
+﻿@model KosSala.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Brisanje";
+    Layout = "~/Views/Shared/_LayoutAdministrator.cshtml";
+}
+
+@using (Html.BeginForm("Obrisi", "Administrator", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+{
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/black-tie/jquery-ui.css">
+    @Html.HiddenFor(model => model.Id)
+    @Html.Label("Da li stvarno zelite da obrisete upravnika")
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+
+            <input type="submit" value="Potvrdi" class="btn btn-warning pull-left  " />
+            @Html.ActionLink("Otkazi", "SviUpravnici", "Administrator", new { @class = "btn btn-primary otkazi pull-right  " })
+
+        </div>
+    </div>
+
+}
+<style>
+    .otkazi {
+        float: right;
+        color:white;
+    }
+</style>

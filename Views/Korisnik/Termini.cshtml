@@ -1,0 +1,900 @@
+﻿@model IEnumerable<KosSala.ViewModels.SaleView>
+@{
+	ViewBag.Title = "Termini";
+	Layout = "~/Views/Shared/_LayoutKorisnik.cshtml";
+}
+
+
+
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href=""http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,400italic"" rel="stylesheet" />
+        <link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" />
+	</head>
+<body>
+	<div class="container">
+		<div class="card border-0 shadow my-5"style="min-width:1000px;">
+			<div class="card-body p-5" >
+				<div style="height: 700px; ">
+					<h4 class="naslov "> TERMINI </h4>
+					<div>
+
+						<!--- proba-->
+						<div class="drop">
+							<div class="option active placeholder" data-value="placeholder">
+								Vrsta basketa
+							</div>
+							<div class="option" value="sve">
+								Svi Termini
+							</div>
+							<div class="option" value="3 na 3">
+								3 na 3
+							</div>
+							<div class="option" value="4 na 4">
+								4 na 4
+							</div>
+							<div class="option" value="5 na 5">
+								5 na 5
+							</div>
+
+						</div>
+
+
+
+					</div>
+
+
+					@{
+						if (Model.Count() == 0)
+						{
+
+							<h5 class="trenutnoNema text-danger"> TRENUTNO NEMA AKTUELNIH TERMINA </h5>
+
+
+						}
+					}
+					<div class="sve box">
+						<div class="sve box">
+							<ul class="event-list">
+
+								@{
+
+                                    foreach (var termin in Model.OrderByDescending(date => date.Termin.PocetakTermina))
+                                    {
+										<li>
+											<time datetime="@termin.Termin.PocetakTermina">
+												<span class="day">@termin.Termin.PocetakTermina.Day</span>
+												<span class="month">
+													@{ int caseSwitch = termin.Termin.PocetakTermina.Month; switch (caseSwitch)
+                                                        {
+                                                            case 1: <label>JAN</label> break;
+                                                            case 2: <label>FEB</label> break;
+                                                            case 3: <label>MAR</label> break;
+                                                            case 4: <label>APR</label> break;
+                                                            case 5: <label>MAJ</label> break;
+                                                            case 6: <label>JUN</label> break;
+                                                            case 7: <label>JUL</label> break;
+                                                            case 8: <label>AVG</label> break;
+                                                            case 9: <label>SEP</label> break;
+                                                            case 10: <label>OKT</label> break;
+                                                            case 11: <label>NOV</label> break;
+                                                            case 12: <label>DEC</label> break;
+                                                        } }
+
+												</span>
+												<span class="year">@termin.Termin.PocetakTermina.Year</span>
+												<span class="time">@(@termin.Termin.KrajTermina - termin.Termin.PocetakTermina)</span>
+											</time>
+											@{
+                                                var base64 = Convert.ToBase64String(termin.Sala.Slika);
+                                                var imgsrc = string.Format("data:image/png;base64,{0}", base64);
+											}
+											<img alt="Independence Day" src="@imgsrc" />
+											<div class="info">
+												<h2 class="title"> @termin.Sala.Naziv</h2>
+												<p class="desc">@termin.Sala.Lokacija</p>
+												<p class="desc">@termin.Termin.VrstaBasketa</p>
+
+												<ul style="width:80%">
+													<li style="width:33%;">
+														<span class="fa fa-clock-o"></span> @termin.Termin.PocetakTermina.ToShortTimeString() - @termin.Termin.KrajTermina.ToShortTimeString()
+														<span class="glyphicon glyphicon-ok"></span>
+													</li>
+													<li style="width:34%;">Status: @{if(termin.Termin.PocetakTermina <= DateTime.Now && termin.Termin.KrajTermina >= DateTime.Now) 
+															{ <label class="play">U toku</label> }
+                                                        else if(termin.Termin.PocetakTermina >= DateTime.Now) { <label class="aktivan">Aktivan</label>} else if(DateTime.Now >= termin.Termin.KrajTermina) { <label class="end">Završen</label>}
+
+
+															}
+													<li style="width:33%;">Broj prijavljenih: @termin.Termin.BrojPrijavljenih <span class="fa fa-user"></span></li>
+												</ul>
+												<div style=" float:right; padding-right:1px; ">
+
+
+													@Html.ActionLink("Pregled ", "TerminInfo", new { id = termin.Termin.Id }, new { @class = "btn btn-primary" })
+
+												</div>
+
+											</div>
+
+
+										</li>
+
+									}
+								}
+							</ul>
+						</div>
+					</div>
+
+
+
+					<div class="3v3 box " id="hideme3v3">
+						<ul class="event-list">
+							<!-- za 3v3-->
+							@{
+
+								foreach (var termin in Model.Where(d => d.Termin.VrstaBasketa == "3 na 3"))
+								{
+									if (Model.Where(d => d.Termin.VrstaBasketa == "3 na 3").Count()==0 )
+									{
+										<h5 class="trenutnoNema text-danger"> TRENUTNO NEMA AKTUELNIH 3 NA 3 TERMINA </h5>
+									}
+
+									<li>
+
+										<time datetime="@termin.Termin.PocetakTermina">
+											<span class="day">@termin.Termin.PocetakTermina.Day</span>
+											<span class="month">
+												@{ int caseSwitch = termin.Termin.PocetakTermina.Month; switch (caseSwitch)
+													{
+														case 1: <label>JAN</label> break;
+														case 2: <label>FEB</label> break;
+														case 3: <label>MAR</label> break;
+														case 4: <label>APR</label> break;
+														case 5: <label>MAJ</label> break;
+														case 6: <label>JUN</label> break;
+														case 7: <label>JUL</label> break;
+														case 8: <label>AVG</label> break;
+														case 9: <label>SEP</label> break;
+														case 10: <label>OKT</label> break;
+														case 11: <label>NOV</label> break;
+														case 12: <label>DEC</label> break;
+													} }
+
+											</span>
+											<span class="year">@termin.Termin.PocetakTermina.Year</span>
+											<span class="time">@(@termin.Termin.KrajTermina - termin.Termin.PocetakTermina)</span>
+										</time>
+										@{
+											var base64 = Convert.ToBase64String(termin.Sala.Slika);
+											var imgsrc = string.Format("data:image/png;base64,{0}", base64);
+										}
+										<img alt="Independence Day" src="@imgsrc" />
+										<div class="info">
+											<h2 class="title"> @termin.Sala.Naziv</h2>
+											<p class="desc">@termin.Sala.Lokacija</p>
+											<p class="desc">@termin.Termin.VrstaBasketa</p>
+
+                                            <ul style="width:80%">
+                                                <li style="width:33%;">
+                                                    <span class="fa fa-clock-o"></span> @termin.Termin.PocetakTermina.Hour : @{ if (termin.Termin.PocetakTermina.Minute == 0)
+                                                        { <label>00 </label>}
+                                                        else
+                                                        {@termin.Termin.PocetakTermina.Minute } }  <span class="glyphicon glyphicon-ok"></span>
+                                                </li>
+												<li style="width:34%;">
+													Status:  @{if (termin.Termin.PocetakTermina <= DateTime.Now && termin.Termin.KrajTermina >= DateTime.Now)
+														{ <label class="play">U toku</label> }
+														else if (termin.Termin.PocetakTermina >= DateTime.Now)
+														{ <label class="aktivan">Aktivan</label>}
+														else if (DateTime.Now >= termin.Termin.KrajTermina)
+														{ <label class="end">Završen</label>}
+
+
+													}
+												</li>
+                                                <li style="width:33%;">Broj prijavljenih: @termin.Termin.BrojPrijavljenih <span class="fa fa-user"></span></li>
+                                            </ul>
+                                            <div style=" float:right; padding-right:1px; ">
+
+                                                @Html.ActionLink("Pregled ", "TerminInfo", new { id = termin.Termin.Id }, new { @class = "btn btn-primary" })
+
+                                            </div>
+										</div>
+
+
+									</li>
+
+								}
+							}
+						</ul>
+					</div>
+					<div class="4v4 box" id="hideme4v4">
+						<ul class="event-list">
+							<!-- za 3v3-->
+							@{
+
+								foreach (var termin in Model.Where(d => d.Termin.VrstaBasketa == "4 na 4"))
+								{
+									<li>
+										<time datetime="@termin.Termin.PocetakTermina">
+											<span class="day">@termin.Termin.PocetakTermina.Day</span>
+											<span class="month">
+												@{ int caseSwitch = termin.Termin.PocetakTermina.Month; switch (caseSwitch)
+													{
+														case 1: <label>JAN</label> break;
+														case 2: <label>FEB</label> break;
+														case 3: <label>MAR</label> break;
+														case 4: <label>APR</label> break;
+														case 5: <label>MAJ</label> break;
+														case 6: <label>JUN</label> break;
+														case 7: <label>JUL</label> break;
+														case 8: <label>AVG</label> break;
+														case 9: <label>SEP</label> break;
+														case 10: <label>OKT</label> break;
+														case 11: <label>NOV</label> break;
+														case 12: <label>DEC</label> break;
+													} }
+
+											</span>
+											<span class="year">@termin.Termin.PocetakTermina.Year</span>
+											<span class="time">@(@termin.Termin.KrajTermina - termin.Termin.PocetakTermina)</span>
+										</time>
+										@{
+											var base64 = Convert.ToBase64String(termin.Sala.Slika);
+											var imgsrc = string.Format("data:image/png;base64,{0}", base64);
+										}
+										<img alt="Independence Day" src="@imgsrc" />
+										<div class="info">
+											<h2 class="title"> @termin.Sala.Naziv</h2>
+											<p class="desc">@termin.Sala.Lokacija</p>
+											<p class="desc">@termin.Termin.VrstaBasketa</p>
+
+											<ul style="width:80%">
+												<li style="width:33%;">
+													<span class="fa fa-clock-o"></span> @termin.Termin.PocetakTermina.Hour : @{ if (termin.Termin.PocetakTermina.Minute == 0)
+														{ <label>00 </label>}
+														else
+														{@termin.Termin.PocetakTermina.Minute } }  <span class="glyphicon glyphicon-ok"></span>
+												</li>
+												<li style="width:34%;">
+													Status:  @{if (termin.Termin.PocetakTermina <= DateTime.Now && termin.Termin.KrajTermina >= DateTime.Now)
+														{ <label class="play">U toku</label> }
+														else if (termin.Termin.PocetakTermina >= DateTime.Now)
+														{ <label class="aktivan">Aktivan</label>}
+														else if (DateTime.Now >= termin.Termin.KrajTermina)
+														{ <label class="end">Završen</label>}
+
+
+													} 
+												</li>
+												<li style="width:33%;">Broj prijavljenih: @termin.Termin.BrojPrijavljenih <span class="fa fa-user"></span></li>
+											</ul>
+                                            <div style=" float:right; padding-right:1px; ">
+
+                                                @Html.ActionLink("Pregled ", "TerminInfo", new { id = termin.Termin.Id }, new { @class = "btn btn-primary" })
+
+                                            </div>
+										</div>
+
+
+									</li>
+
+								}
+							}
+						</ul>
+					</div>
+					<div class="5v5 box" id="hideme5v5">
+						<ul class="event-list">
+							<!-- za 3v3-->
+							@{
+
+								foreach (var termin in Model.Where(d => d.Termin.VrstaBasketa == "5 na 5"))
+								{
+									<li>
+										<time datetime="@termin.Termin.PocetakTermina">
+											<span class="day">@termin.Termin.PocetakTermina.Day</span>
+											<span class="month">
+												@{ int caseSwitch = termin.Termin.PocetakTermina.Month; switch (caseSwitch)
+													{
+														case 1: <label>JAN</label> break;
+														case 2: <label>FEB</label> break;
+														case 3: <label>MAR</label> break;
+														case 4: <label>APR</label> break;
+														case 5: <label>MAJ</label> break;
+														case 6: <label>JUN</label> break;
+														case 7: <label>JUL</label> break;
+														case 8: <label>AVG</label> break;
+														case 9: <label>SEP</label> break;
+														case 10: <label>OKT</label> break;
+														case 11: <label>NOV</label> break;
+														case 12: <label>DEC</label> break;
+													} }
+
+											</span>
+											<span class="year">@termin.Termin.PocetakTermina.Year</span>
+											<span class="time">@(@termin.Termin.KrajTermina - termin.Termin.PocetakTermina)</span>
+										</time>
+										@{
+											var base64 = Convert.ToBase64String(termin.Sala.Slika);
+											var imgsrc = string.Format("data:image/png;base64,{0}", base64);
+										}
+										<img alt="Independence Day" src="@imgsrc" />
+										<div class="info">
+											<h2 class="title"> @termin.Sala.Naziv</h2>
+											<p class="desc">@termin.Sala.Lokacija</p>
+											<p class="desc">@termin.Termin.VrstaBasketa</p>
+
+											<ul style="width:80%">
+												<li style="width:33%;">
+													<span class="fa fa-clock-o"></span> @termin.Termin.PocetakTermina.Hour : @{ if (termin.Termin.PocetakTermina.Minute == 0)
+														{ <label>00 </label>}
+														else
+														{@termin.Termin.PocetakTermina.Minute } }  <span class="glyphicon glyphicon-ok"></span>
+												</li>
+												<li style="width:34%;">
+													Status:  @{if (termin.Termin.PocetakTermina <= DateTime.Now && termin.Termin.KrajTermina >= DateTime.Now)
+														{ <label class="play">U toku</label> }
+														else if (termin.Termin.PocetakTermina >= DateTime.Now)
+														{ <label class="aktivan">Aktivan</label>}
+														else if (DateTime.Now >= termin.Termin.KrajTermina)
+														{ <label class="end">Završen</label>}
+
+
+													}
+												</li>
+												<li style="width:33%;">Broj prijavljenih: @termin.Termin.BrojPrijavljenih <span class="fa fa-user"></span></li>
+											</ul>
+                                            <div style=" float:right; padding-right:1px; ">
+
+                                                @Html.ActionLink("Pregled ", "TerminInfo", new { id = termin.Termin.Id }, new { @class = "btn btn-primary" })
+
+                                            </div>
+										</div>
+
+
+									</li>
+
+								}
+							}
+						</ul>
+					</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script type="text/javascript">
+	$("#hideme3v3").hide();
+</script>
+<script type="text/javascript">
+	$("#hideme4v4").hide();
+</script>
+<script type="text/javascript">
+	$("#hideme5v5").hide();
+</script>
+
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("select").change(function () {
+			$("select option:selected").each(function () {
+                if ($(this).attr("value") == "3 na 3") {
+					$(".box").hide();
+					$(".3v3").show();
+				}
+                if ($(this).attr("value") == "4 na 4") {
+					$(".box").hide();
+					$(".4v4").show();
+				}
+                if ($(this).attr("value") == "5 na 5") {
+					$(".box").hide();
+					$(".5v5").show();
+				}
+				if ($(this).attr("value") == "sve") {
+					$(".box").hide();
+					$(".sve").show();
+				}
+			});
+		}).change();
+	});
+</script>
+<script>
+	$(document).ready(function () {
+		$(".drop .option").click(function () {
+			var val = $(this).attr("value"),
+				$drop = $(".drop"),
+				prevActive = $(".drop .option.active").attr("value"),
+				options = $(".drop .option").length;
+			$drop.find(".option.active").addClass("mini-hack");
+			$drop.toggleClass("visible");
+			$drop.removeClass("withBG");
+			$(this).css("top");
+			$drop.toggleClass("opacity");
+			$(".mini-hack").removeClass("mini-hack");
+			if ($drop.hasClass("visible")) {
+				setTimeout(function () {
+					$drop.addClass("withBG");
+				}, 400 + options * 100);
+			}
+			if ($(this).attr("value") == "sve") {
+				$(".box").hide();
+				$(".sve").show();
+			}
+            if ($(this).attr("value") == "3 na 3") {
+				$(".box").hide();
+				$(".3v3").show();
+			}
+            if ($(this).attr("value") == "4 na 4") {
+				$(".box").hide();
+				$(".4v4").show();
+			}
+            if ($(this).attr("value") == "5 na 5") {
+				$(".box").hide();
+				$(".5v5").show();
+			}
+
+			triggerAnimation();
+			if (val !== "placeholder" || prevActive === "placeholder") {
+				$(".drop .option").removeClass("active");
+				$(this).addClass("active");
+			};
+		});
+
+		function triggerAnimation() {
+			var finalWidth = $(".drop").hasClass("visible") ? 22 : 20;
+			$(".drop").css("width", "24em");
+			setTimeout(function () {
+				$(".drop").css("width", finalWidth + "em");
+			}, 400);
+		}
+	});
+</script>
+<style>
+	*,
+	*:before,
+	*:after {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
+
+	.font-face {
+		font-family: pfs-bold;
+		src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/PFSquareSansPro-Bold.otf");
+	}
+
+
+	.drop {
+		width: 20em;
+		margin: 5em auto;
+		color: #FF6B00;
+		text-transform: uppercase;
+		position: relative;
+		-webkit-transition: width 0.5s;
+		transition: width 0.5s;
+		will-change: width;
+	}
+
+		.drop .option {
+			padding: 1em;
+			cursor: pointer;
+			background-color: #343a40;
+		}
+
+			.drop .option:not(.active) {
+				display: none;
+				opacity: 0;
+				-webkit-transform: translateY(-50%);
+				transform: translateY(-50%);
+			}
+
+		.drop.visible {
+			-webkit-animation: bounce 1s;
+			animation: bounce 1s;
+			width: 24em;
+		}
+
+			.drop.visible:before, .drop.visible:after {
+				border-color: #fff;
+			}
+
+			.drop.visible:before {
+				opacity: 0;
+			}
+
+			.drop.visible:after {
+				opacity: 1;
+			}
+
+			.drop.visible .option {
+				color: #fff;
+				display: block;
+			}
+
+		.drop.opacity .option {
+			-webkit-transform: translateZ(0);
+			transform: translateZ(0);
+			opacity: 1;
+		}
+
+			.drop.opacity .option:nth-child(0) {
+				-webkit-transition: opacity 0.5s 0s, -webkit-transform 0.5s 0s;
+				transition: opacity 0.5s 0s, -webkit-transform 0.5s 0s;
+				transition: opacity 0.5s 0s, transform 0.5s 0s;
+				transition: opacity 0.5s 0s, transform 0.5s 0s, -webkit-transform 0.5s 0s;
+			}
+
+			.drop.opacity .option:nth-child(1) {
+				-webkit-transition: opacity 0.5s 0.1s, -webkit-transform 0.5s 0.1s;
+				transition: opacity 0.5s 0.1s, -webkit-transform 0.5s 0.1s;
+				transition: opacity 0.5s 0.1s, transform 0.5s 0.1s;
+				transition: opacity 0.5s 0.1s, transform 0.5s 0.1s, -webkit-transform 0.5s 0.1s;
+			}
+
+			.drop.opacity .option:nth-child(2) {
+				-webkit-transition: opacity 0.5s 0.2s, -webkit-transform 0.5s 0.2s;
+				transition: opacity 0.5s 0.2s, -webkit-transform 0.5s 0.2s;
+				transition: opacity 0.5s 0.2s, transform 0.5s 0.2s;
+				transition: opacity 0.5s 0.2s, transform 0.5s 0.2s, -webkit-transform 0.5s 0.2s;
+			}
+
+			.drop.opacity .option:nth-child(3) {
+				-webkit-transition: opacity 0.5s 0.3s, -webkit-transform 0.5s 0.3s;
+				transition: opacity 0.5s 0.3s, -webkit-transform 0.5s 0.3s;
+				transition: opacity 0.5s 0.3s, transform 0.5s 0.3s;
+				transition: opacity 0.5s 0.3s, transform 0.5s 0.3s, -webkit-transform 0.5s 0.3s;
+			}
+
+			.drop.opacity .option:nth-child(4) {
+				-webkit-transition: opacity 0.5s 0.4s, -webkit-transform 0.5s 0.4s;
+				transition: opacity 0.5s 0.4s, -webkit-transform 0.5s 0.4s;
+				transition: opacity 0.5s 0.4s, transform 0.5s 0.4s;
+				transition: opacity 0.5s 0.4s, transform 0.5s 0.4s, -webkit-transform 0.5s 0.4s;
+			}
+
+			.drop.opacity .option:nth-child(5) {
+				-webkit-transition: opacity 0.5s 0.5s, -webkit-transform 0.5s 0.5s;
+				transition: opacity 0.5s 0.5s, -webkit-transform 0.5s 0.5s;
+				transition: opacity 0.5s 0.5s, transform 0.5s 0.5s;
+				transition: opacity 0.5s 0.5s, transform 0.5s 0.5s, -webkit-transform 0.5s 0.5s;
+			}
+
+			.drop.opacity .option:nth-child(6) {
+				-webkit-transition: opacity 0.5s 0.6s, -webkit-transform 0.5s 0.6s;
+				transition: opacity 0.5s 0.6s, -webkit-transform 0.5s 0.6s;
+				transition: opacity 0.5s 0.6s, transform 0.5s 0.6s;
+				transition: opacity 0.5s 0.6s, transform 0.5s 0.6s, -webkit-transform 0.5s 0.6s;
+			}
+
+			.drop.opacity .option:nth-child(7) {
+				-webkit-transition: opacity 0.5s 0.7s, -webkit-transform 0.5s 0.7s;
+				transition: opacity 0.5s 0.7s, -webkit-transform 0.5s 0.7s;
+				transition: opacity 0.5s 0.7s, transform 0.5s 0.7s;
+				transition: opacity 0.5s 0.7s, transform 0.5s 0.7s, -webkit-transform 0.5s 0.7s;
+			}
+
+			.drop.opacity .option:nth-child(8) {
+				-webkit-transition: opacity 0.5s 0.8s, -webkit-transform 0.5s 0.8s;
+				transition: opacity 0.5s 0.8s, -webkit-transform 0.5s 0.8s;
+				transition: opacity 0.5s 0.8s, transform 0.5s 0.8s;
+				transition: opacity 0.5s 0.8s, transform 0.5s 0.8s, -webkit-transform 0.5s 0.8s;
+			}
+
+			.drop.opacity .option:nth-child(9) {
+				-webkit-transition: opacity 0.5s 0.9s, -webkit-transform 0.5s 0.9s;
+				transition: opacity 0.5s 0.9s, -webkit-transform 0.5s 0.9s;
+				transition: opacity 0.5s 0.9s, transform 0.5s 0.9s;
+				transition: opacity 0.5s 0.9s, transform 0.5s 0.9s, -webkit-transform 0.5s 0.9s;
+			}
+
+		.drop.withBG .option {
+			-webkit-transition: background-color 0.1s;
+			transition: background-color 0.1s;
+		}
+
+			.drop.withBG .option:not(.placeholder):hover {
+				background-color: #FF6B00;
+			}
+
+			.drop.withBG .option:not(.placeholder).active {
+				background-color: #FF6B00;
+			}
+
+		.drop:after, .drop:before {
+			content: "";
+			position: absolute;
+			top: 1.5em;
+			right: 1em;
+			width: 0.75em;
+			height: 0.75em;
+			border: 0.2em solid #86919a;
+			-webkit-transform: rotate(45deg);
+			transform: rotate(45deg);
+			-webkit-transform-origin: 50% 50%;
+			transform-origin: 50% 50%;
+			-webkit-transition: opacity 0.2s;
+			transition: opacity 0.2s;
+		}
+
+		.drop:before {
+			border-left: none;
+			border-top: none;
+			top: 1.2em;
+		}
+
+		.drop:after {
+			border-right: none;
+			border-bottom: none;
+			opacity: 0;
+		}
+
+	.mini-hack {
+		opacity: 0;
+		-webkit-transform: translateY(-50%);
+		transform: translateY(-50%);
+	}
+</style>
+<style>
+
+
+
+	body {
+		padding: 60px 0px;
+		background-color: rgb(220, 220, 220);
+	}
+
+	.event-list  {
+		list-style: none;
+		font-family: 'Lato', sans-serif;
+		margin: 0px;
+		padding: 0px;
+	}
+
+		.event-list > li {
+			background-color: rgb(255, 255, 255);
+			box-shadow: 0px 0px 5px rgb(51, 51, 51);
+			box-shadow: 0px 0px 5px rgba(51, 51, 51, 0.7);
+			padding: 0px;
+			margin: 0px 0px 20px;
+		}
+
+			.event-list > li > time {
+				display: inline-block;
+				width: 100%;
+				color: rgb(255, 255, 255);
+				background-color: #FF6B00;
+				padding: 5px;
+				text-align: center;
+				text-transform: uppercase;
+			}
+
+			.event-list > li:nth-child(even) > time {
+				background-color: #343a40;
+			}
+
+			.event-list > li > time > span {
+				display: none;
+			}
+
+			.event-list > li > time > .day {
+				display: block;
+				font-size: 56pt;
+				font-weight: 100;
+				line-height: 1;
+			}
+
+			.event-list > li time > .month {
+				display: block;
+				font-size: 24pt;
+				font-weight: 900;
+				line-height: 1;
+			}
+
+			.event-list > li > img {
+				width: 100%;
+			}
+
+			.event-list > li > .info {
+				padding-top: 5px;
+				text-align: center;
+			}
+
+				.event-list > li > .info > .title {
+					font-size: 17pt;
+					font-weight: 700;
+					margin: 0px;
+				}
+
+				.event-list > li > .info > .desc {
+					font-size: 13pt;
+					font-weight: 300;
+					margin: 0px;
+				}
+
+				.event-list > li > .info > ul,
+				.event-list > li > .social > ul {
+					display: table;
+					list-style: none;
+					margin: 10px 0px 0px;
+					padding: 0px;
+					width: 100%;
+					text-align: center;
+				}
+
+			.event-list > li > .social > ul {
+				margin: 0px;
+			}
+
+				.event-list > li > .info > ul > li,
+				.event-list > li > .social > ul > li {
+					display: table-cell;
+					cursor: pointer;
+					color: rgb(30, 30, 30);
+					font-size: 11pt;
+					font-weight: 300;
+					padding: 3px 0px;
+				}
+
+					.event-list > li > .info > ul > li > a {
+						display: block;
+						width: 100%;
+						color: rgb(30, 30, 30);
+						text-decoration: none;
+					}
+					
+				.event-list > li > .social > ul > li {
+					padding: 0px;
+				}
+
+					.event-list > li > .social > ul > li > a {
+						padding: 3px 0px;
+					}
+
+					.event-list > li > .info > ul > li:hover,
+					.event-list > li > .social > ul > li:hover {
+						color: rgb(30, 30, 30);
+						background-color: rgb(200, 200, 200);
+					}
+
+	.facebook a,
+	.twitter a,
+	.google-plus a {
+		display: block;
+		width: 100%;
+		color: rgb(75, 110, 168) !important;
+	}
+
+	.twitter a {
+		color: rgb(79, 213, 248) !important;
+	}
+
+	.google-plus a {
+		color: rgb(221, 75, 57) !important;
+	}
+
+	.facebook:hover a {
+		color: rgb(255, 255, 255) !important;
+		background-color: rgb(75, 110, 168) !important;
+	}
+
+	.twitter:hover a {
+		color: rgb(255, 255, 255) !important;
+		background-color: rgb(79, 213, 248) !important;
+	}
+	
+	.google-plus:hover a {
+		color: rgb(255, 255, 255) !important;
+		background-color: rgb(221, 75, 57) !important;
+	}
+	
+	.event-list > li {
+		position: relative;
+		display: block;
+		width: 100%;
+		height: 120px;
+		padding: 0px;
+	}
+
+
+		.event-list > li > time,
+		.event-list > li > img {
+			display: inline-block;
+		}
+
+		.event-list > li > time,
+		.event-list > li > img {
+			width: 120px;
+			float: left;
+		}
+
+		.event-list > li > .info {
+			background-color: rgb(245, 245, 245);
+			overflow: hidden;
+		}
+
+		.event-list > li > time,
+		.event-list > li > img {
+			width: 120px;
+			height: 120px;
+			padding: 0px;
+			margin: 0px;
+		}
+
+		.event-list > li > .info {
+			position: relative;
+			height: 120px;
+			text-align: left;
+			padding-right: 10px;
+		}
+
+			.event-list > li > .info > .title,
+			.event-list > li > .info > .desc {
+				padding: 0px 10px;
+			}
+
+			.event-list > li > .info > ul {
+				position: absolute;
+				left: 0px;
+				bottom: 0px;
+			}
+
+		.event-list > li > .social {
+			position: absolute;
+			top: 0px;
+			right: 0px;
+			display: block;
+			width: 40px;
+		}
+
+			.event-list > li > .social > ul {
+				border-left: 1px solid rgb(230, 230, 230);
+			}
+
+				.event-list > li > .social > ul > li {
+					display: block;
+					padding: 0px;
+				}
+
+					.event-list > li > .social > ul > li > a {
+						display: block;
+						width: 40px;
+						padding: 10px 0px 9px;
+					}
+					
+	.trenutnonema { text-align: center;
+					margin-left:1%;
+	}
+	.naslov { text-align: center;
+					margin-left:1%;
+	}
+	.play
+	{
+		color:#5199FF 
+	}
+	.aktivan
+	{
+		color: #8CBA51;
+	}
+	.end
+	{
+		color:#F6522E;
+	}
+	
+</style>

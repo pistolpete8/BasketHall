@@ -1,0 +1,238 @@
+﻿@model KosSala.ViewModels.SaleView
+
+@{
+    ViewBag.Title = "PrikazSala";
+    Layout = "~/Views/Shared/_LayoutUS.cshtml";
+}
+
+<h2>PrikazSala</h2>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+  
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> <!--za dialog popup jquery-->
+
+    <script src="~/Content/DatePicker/notify.min.js"></script>
+    <script src="~/Content/DatePicker/jquery.datetimepicker.full.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+</head>
+<body>
+    <<div class="container">
+        <div class="card border-0 shadow my-5">
+            <div class="card-body p-5">
+
+                <a class="btn btn-default" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("DodajEdit","UpravnikSale")')"><i class="fa fa-plus"></i>Dodaj termin</a>
+
+                <table id="myTablee" class="display  table-responsive-xl table" style="width:100%">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Naziv</th>
+                            <th>Početak termina</th>
+                            <th>Kraj termina</th>
+                            <th>Broj Prijavljenih</th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    <tfoot class="thead-dark">
+                        <tr>
+                            <th>Naziv</th>
+                            <th>Početak termina</th>
+                            <th>Kraj termina</th>
+                            <th>Broj Prijavljenih</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<!--Obican izgled tabele:     //cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet  -->
+
+
+
+
+@section scripts{
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/black-tie/jquery-ui.css"> <!-- tema za izgled dialoga za edit i unos termina-->
+
+
+    <script>
+                    var Popup,table,pom, pom1;
+            $(document).ready(function () {
+                table = $('#myTablee').DataTable({
+
+                    "ajax": {
+                        "url": "/UpravnikSale/getSale",
+                        "type": "GET",
+                        "datatype": "json"
+                    },
+
+                    "columns": [
+                        { "data": "Naziv", "autoWidth": true },
+                        {
+                            "data": "Pocetaktermina", "autoWidth":true
+                        },
+                        { "data": "Krajtermina", "autoWidth": true },
+                        { "data": "BrojPrijavljenih", "autoWidth": true },
+
+
+
+
+                        { "data": "TerminId", "render": function (data) {
+                                return "<a class='btn btn-default btn-sm' onclick=PopupForm('@Url.Action("DodajEdit","UpravnikSale")/"+data+"')><i class='fa fa-pencil'></i>Izmeni</a> <a class='btn btn-danger btn-sm' onclick=Obrisi("+data+")><i class=' fa fa-trash'></i>Obriši</a>"
+                        },
+                            "orderable": false,
+                            "width": "150px",
+                            "searchable":false
+                        }
+
+
+
+                    ], "order": [[1, 'asc']], "language": { "emptyTable": "Trenutno nema podataka" }
+
+
+                });
+                $('#myTable tbody').on('click', 'button', function (data) {
+
+                    var data = table.row($(this).parents('tr')).data();
+                    var url = "/Korisnik/Profile/" + data.Id;
+
+                    window.location.href = url;
+                });
+            });
+
+    function PopupForm(url) {
+
+        var formDiv = $('<div/>');
+        $.get(url)
+            .done(function (response) {
+                formDiv.html(response);
+
+                Popup = formDiv.dialog({
+                    autoOpen: true,
+                    resizable: false,
+                    title: 'Popuni detalje',
+                    height: 420,
+                    width: 700,
+                    modal: true,
+                    show: "blind",
+                    hide: "blind",
+
+            dialogClass: 'noPadding',
+                    close: function () {
+                        Popup.dialog('destroy').remove();
+                        $( ".zatvori" ).dialog( "destroy" );
+
+                    }
+                });
+
+
+            });
+
+              }
+
+    function SubmitForm(form) {
+
+        $.validator.unobtrusive.parse(form);
+        if ($(form).valid()) {
+            $.ajax({
+                type: "POST",
+                url: form.action,
+                data: $(form).serialize(),
+
+                success: function (data) {
+                    if (data.success) {
+                        Popup.dialog('close');
+                        table.ajax.reload();
+
+                        $.notify(data.message, {
+                            globalPostion: "top center",
+                            className: "success"
+                        })
+
+                    }
+
+                }
+            });
+        }
+        return false;
+        }
+
+    //}
+    function Obrisi(id) {
+        if (confirm("Da li ste sigurni da želite da obrišete termin?"))
+        {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Obrisi","UpravnikSale")/' + id,
+
+                success: function (data) {
+                    if (data.success)
+                    {
+                        table.ajax.reload();
+
+                        $.notify(data.message, {
+                            globalPostion: "top center",
+                            className: "success"
+                        })
+                    }
+                }
+
+            })
+        }
+    }
+
+    </script>
+}
+
+
+<style>
+    .table td {
+        vertical-align: middle;
+        font-size: 18px;
+    }
+
+    .ui-dialog,
+    .ui-dialog-title {
+        width: 100%;
+    }
+
+    .ui-dialog-titlebar-close {
+        display: none;
+    }
+
+    .noClass {
+        background-color: #000;
+        color: #fff;
+    }
+
+    .yesClass {
+        background-color: #fff;
+        color: #000;
+    }
+
+    .ui-dialog {
+        background: white;
+    }
+
+    .ui-button.yesClass {
+        background: green;
+    }
+
+        .ui-button.yesClass.ui-state-hover,
+        .ui-button.yesClass.ui-state-active {
+            background: red;
+        }
+
+    .ui-dialog .ui-dialog-buttonpane {
+        text-align: center;
+    }
+</style>
+

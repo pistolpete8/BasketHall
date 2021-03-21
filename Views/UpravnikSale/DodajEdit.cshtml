@@ -1,0 +1,147 @@
+﻿@model KosSala.ViewModels.TerminiView
+
+@{
+    ViewBag.Title = "Popuni Detalje";
+    Layout = null;
+}
+
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Content/DatePicker/notify.min.js"></script>
+    <script src="~/Content/DatePicker/jquery.datetimepicker.full.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+</head>
+
+@using (Html.BeginForm("DodajEdit", "UpravnikSale", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Termin.Id)
+
+    @Html.HiddenFor(model => model.Termin.BrojPrijavljenih)
+
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="row">
+
+        <div class="col">
+            @Html.LabelFor(model => model.Termin.PocetakTermina, htmlAttributes: new { @class = "control-label col-md-2",  })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Termin.PocetakTermina, new { htmlAttributes = new { @autocomplete = "off", @class = "datetime form-control pocetak" } })
+                @Html.ValidationMessageFor(model => model.Termin.PocetakTermina, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+
+        <div class="col">
+            @Html.LabelFor(model => model.Termin.KrajTermina, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Termin.KrajTermina, new { htmlAttributes = new { @autocomplete = "off",  @class = "datetime form-control kraj" } })
+                @Html.ValidationMessageFor(model => model.Termin.KrajTermina, null, new { @class = "text-danger" })
+                <div id="prob" class="text-danger"></div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+    <hr />
+    <!-- Default form grid -->
+    <div class="row">
+
+        @if (Model.indikator == false)
+        {<div class="form-group col">
+                <label class="control-label col-md-2">Sala</label>
+                <div class="dropdown col">
+                    @Html.DropDownListFor(m => m.Termin.SalaId, Model.listaSala, "Izaberite sportsku salu", new { @class = "form-control  dropdown-toggle" })
+                    @Html.ValidationMessageFor(model => model.Termin.SalaId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col">
+                <label class="control-label col-md-2">VrstaBasketa</label>
+                <div class="dropdown col">
+                    @Html.DropDownListFor(m => m.Termin.VrstaBasketa, Model.VrstaBasketa, "Izaberite vrstu basketa", new { @class = "form-control  dropdown-toggle" })
+                    @Html.ValidationMessageFor(model => model.Termin.VrstaBasketa, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+        }
+        else
+        { @Html.HiddenFor(model => model.Termin.SalaId)
+        @Html.HiddenFor(model => model.Termin.BrojPrijavljenih)
+
+        <div class="form-group col">
+            <label class="control-label col-md-2">VrstaBasketa</label>
+            <div class="dropdown col">
+
+                @Html.DropDownListFor(m => m.Termin.VrstaBasketa, Model.VrstaBasketa, new { @class = "form-control  dropdown-toggle" })
+                @Html.ValidationMessageFor(model => model.Termin.VrstaBasketa, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+    }
+
+
+
+
+
+
+    </div>
+    <hr style="padding-bottom:5px" />
+
+    <div class="modal-footer">
+        <div style="width:100%">
+            <input type="submit" id="potvrda" value="Napravi" class="btn btn-primary pull-left" />
+            <input type="reset" value="Resetuj" class="btn btn-warning pull-right " />
+
+        </div>
+    </div>
+
+    <script>
+        $("#Termin_KrajTermina").datetimepicker({
+            step: 5
+        });
+        $("#Termin_PocetakTermina").datetimepicker({
+            step: 5
+        });
+    </script>
+
+    
+        <script>
+            $("#Termin_KrajTermina").change(function() {
+                var startDate = document.getElementById("Termin_PocetakTermina").value;
+                var endDate = document.getElementById("Termin_KrajTermina").value;
+
+                if ((Date.parse(endDate) <= Date.parse(startDate))) {
+
+                    document.getElementById("prob").innerHTML = "Početak termina mora biti pre kraja termina";
+                    var dugme = document.getElementById("potvrda");
+                    $('#potvrda').attr('disabled', 'disabled');
+
+
+                }
+                else {
+                    document.getElementById("prob").innerHTML = "";
+                    $('#potvrda').removeAttr('disabled');
+                }
+      });
+    </script>
+    
+}
+<style>
+    .ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle {
+        background: #ff0000;
+    }
+</style>
+
+

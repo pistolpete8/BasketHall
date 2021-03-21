@@ -1,0 +1,102 @@
+﻿@model IEnumerable<KosSala.Models.ApplicationUser>
+
+
+<body>
+    <<div class="container">
+        <div class="card border-0 shadow my-5">
+            <div class="card-body p-5">
+
+                <h2>Lista Korisnika</h2>
+
+
+
+                <table id="myTable" class="display table table-striped table-light table-responsive-xl" style="width:100%">
+                    <thead class="thead-dark">
+                        <tr>
+
+                            <th></th>
+                            <th>Ime</th>
+                            <th>Prezime</th>
+                            <th>UserName</th>
+                            <th>Rejting</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tfoot class="thead-dark">
+                        <tr>
+                            <th></th>
+                            <th>Ime</th>
+                            <th>Prezime</th>
+                            <th>UserName</th>
+                            <th>Rejting</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                    </table>
+            </div>
+        </div>
+</body>
+
+
+<!--Obican izgled tabele:     //cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet  -->
+
+<link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="~/Content/Datatables/jquery.dataTables.min.js"></script>
+
+@section scripts{
+    <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            var table = $('#myTable').DataTable({
+                "ajax": {
+                    "url": "/Korisnik/GetKorisnici",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+
+                    {
+                        data: "SlikaString", "autoWidth": true, "render": function (data) {
+
+                            return '<img src="' + data + '" width="45" height="45"  />'
+
+                        }
+                    },
+                    { "data": "Ime", "autoWidth": true },
+                    { "data": "Prezime", "autoWidth": true },
+                    { "data": "UserName", "autoWidth": true },
+                    { "data": "Rejting", "render": function (data, type, full) { return data.toString().match(/\d+(\.\d{1,2})?/g)[0] } },
+                    { "defaultContent": "<button class=" + "btn btn-secondary btn-sm" + ">Profil</button>" }
+
+                ], "order": [[2, 'asc']]
+
+            });
+            $('#myTable tbody').on('click', 'button', function () {
+
+                var data = table.row($(this).parents('tr')).data();
+                var url = "/Korisnik/Profile/" + data.Id;
+
+                window.location.href = url;
+            });
+        });
+
+
+    </script>
+
+}
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutKorisnik.cshtml";
+}
+<style>
+    img {
+        border-radius: 50%;
+    }
+    .table td {
+    vertical-align: middle;
+    font-size: 20px;
+    font-family: Bahnschrift;
+}
+</style>

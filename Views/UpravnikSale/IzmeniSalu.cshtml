@@ -1,0 +1,145 @@
+﻿@model KosSala.ViewModels.SalaIzm
+
+@{
+    ViewBag.Title = "IzmeniSalu";
+    Layout = "~/Views/Shared/_LayoutUS.cshtml";
+}
+<head>
+   
+</head>
+
+<h2>IzmeniSalu</h2>
+<body>
+    <div class="container">
+        <div class="card border-0 shadow my-5">
+            <div class="card-body p-5">
+                @using (Html.BeginForm(Html.BeginForm("IzmeniSalu", "UpravnikSale", FormMethod.Post, new { enctype = "multipart/form-data" })))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <h4>Sala</h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.Sala.Id)
+                        @Html.HiddenFor(model => model.Sala.UpravnikId)
+                        @Html.HiddenFor(model => model.Slikapom)
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Sala.Naziv, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Sala.Naziv, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Sala.Naziv, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Sala.Lokacija, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Sala.Lokacija, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Sala.Lokacija, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Sala.Opis, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Sala.Opis, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Sala.Opis, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        @{
+                            var base64 = Convert.ToBase64String(Model.Slikapom);
+                            var imgsrc = string.Format("data:image/png;base64,{0}", base64);
+                        }
+
+
+                        <div class="polaroid container ">
+
+                            <img src=" @imgsrc" alt="Picture" style="width: 100%">
+                            <div class="container">
+                                <p>Fotografija sale</p>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="container2 container">
+                            <div class="form-group">
+
+                                <div class="col-md-10">
+                                    <input type="file" id="fileUpload" name="slika" accept=".png,.jpg,.jpeg,.gif,.tif" />
+                                    <div class="container">
+                                        <p>Izmeni sliku sale</p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Potvrdi izmenu" class="btn btn-default" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div>
+
+                    @Html.ActionLink("Nazad na moje sale", "PrikazivanjeSala", "UpravnikSale", new { @class = "btn btn-default" })
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    <style>
+
+        body {
+            margin: 25px;
+        }
+
+        .polaroid {
+            width: 35%;
+            height: 35%;
+            min-height: 300px;
+            min-width: 300px;
+            background-color: white;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            margin-bottom: 25px;
+            padding-top: 2%;
+        }
+
+        .container1 {
+            text-align: center;
+            padding: 50px 100px;
+            min-height: 300px;
+            min-width: 300px;
+        }
+
+        .container2 {
+            width: 35%;
+            height: 15%;
+            min-height: 100px;
+            min-width: 300px;
+            padding-top: 2%;
+            padding-bottom: 2%;
+        }
+
+        img:hover {
+            box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+        }
+    </style>
+
+</body>
+
+
+
+
+
+
+

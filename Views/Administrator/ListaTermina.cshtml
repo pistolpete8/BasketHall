@@ -1,0 +1,107 @@
+﻿@model KosSala.Models.Termin
+
+@{
+    ViewBag.Title = "ListaTermina";
+    Layout = "~/Views/Shared/_LayoutAdministrator.cshtml";
+}
+
+
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+        <script type="text/javascript" src="~/Content/Datatables/jquery.dataTables.min.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+
+        <script src="~/Content/DatePicker/notify.min.js"></script>
+        <script src="~/Content/DatePicker/jquery.datetimepicker.full.js"></script>
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+    </head>
+<body>
+    
+    <<div class="container">
+        <div class="card border-0 shadow my-5">
+            <div class="card-body p-5">
+                <h2>Lista Termina</h2>
+
+                <table id="myTablee" class="display   table" style="width:100%">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Naziv sportske sale</th>
+                            <th>Početak termina</th>
+                            <th>Kraj termina</th>
+                            <th>Broj prijavljenih</th>
+
+
+                        </tr>
+                    </thead>
+                    <tfoot class="thead-dark">
+                        <tr>
+                            <th>Naziv</th>
+                            <th>Početak termina</th>
+                            <th>Kraj termina</th>
+                            <th>Broj Prijavljenih</th>
+
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<!--Obican izgled tabele:     //cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet  -->
+
+
+
+
+@section scripts{
+
+
+    <script>
+                    var Popup,table,pom, pom1;
+            $(document).ready(function () {
+                table = $('#myTablee').DataTable({
+
+                    "ajax": {
+                        "url": "/Administrator/PribaviTermine",
+                        "type": "GET",
+                        "datatype": "json"
+                    },
+
+                    "columns": [
+                        { "data": "Naziv", "autoWidth": true },
+                        {
+                            "data": "Pocetaktermina", "autoWidth":true
+                        },
+                        { "data": "Krajtermina", "autoWidth": true },
+                        { "data": "BrojPrijavljenih", "autoWidth": true },
+
+
+
+
+                       
+
+
+
+                    ], "order": [[1, 'asc']], "language": { "emptyTable": "Trenutno nema podataka" }
+
+
+                });
+                
+            });
+
+    </script>
+}
+
+
+<style>
+    .table td {
+        vertical-align: middle;
+        font-size: 18px;
+    }
+</style>

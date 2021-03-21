@@ -1,0 +1,371 @@
+﻿@model KosSala.ViewModels.KorisnikSl
+
+@{
+    ViewBag.Title = "ProfileAcc";
+    Layout = "~/Views/Shared/LayoutMenage.cshtml";
+}
+@Html.BeginForm(Html.BeginForm("ProfileAcc", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@Html.HiddenFor(model => model.Slika)
+
+
+<link href="~/Content/PictureUploadProfile/StyleSheet1.css" rel="stylesheet" />
+<link href="~/Content/PictureUploadProfile/StyleSheet2.css" rel="stylesheet" />
+<link href="~/Content/NovaTema/logo-avatar-navbar.css" rel="stylesheet" />
+<script src="~/Content/PictureUploadProfile/JavaScript.js"></script>
+
+
+
+
+
+
+<h2>ProfileAcc</h2>
+<body>
+    <div class="container">
+        <div class="card border-0 shadow my-5">
+            <div class="card-body p-5" style="height:700px;">
+
+
+
+
+                <div class="profile-content">
+                    <div class="container ">
+                        <div class="second float-right">
+
+
+                            <div class="profile" style="padding-top:30px;">
+                                <div class="avatar-wrapper">
+                                    @{
+                                        var base64 = Convert.ToBase64String(Model.Slika);
+                                        var imgsrc = string.Format("data:image/png;base64,{0}", base64);
+                                    }
+
+                                    <img class="profile-pic" src="@imgsrc" />
+                                    <div class="upload-button">
+                                        <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+                                    </div>
+                                    <input class="file-upload" type="file" name="slika" accept="image/*" />
+
+                                </div>
+                                <center>
+
+                                    <h3 class="media-heading " style="font:bi">@Model.Korisnik.UserName <small></small></h3>
+
+                                </center>
+                                <div style="width:100%; text-align:center">
+                                    <hr />
+
+                                    <label>Klikni na sliku za izmenu i potvrdi izmenu klikom na:  </label>
+                                    <button type="submit" class="btn btn-primary" id="btnsub"><i class="fa fa-check  "></i></button>
+                                    <div>Preporučeni format slike 1:1  </div>
+
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="first ">
+
+                            <h4 class="title">@Model.Korisnik.Ime @Model.Korisnik.Prezime</h4>
+                            <hr />
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    @Html.DisplayName("Ime")
+
+                                </dt>
+
+                                <dd>
+                                    @Model.Korisnik.Ime
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayName("Prezime")
+
+                                </dt>
+
+                                <dd>
+                                    @Model.Korisnik.Prezime
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayName("Korisničko ime ")
+
+                                </dt>
+
+                                <dd>
+                                    @Model.Korisnik.UserName
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayName("Email")
+
+                                </dt>
+
+                                <dd>
+                                    @Model.Korisnik.Email
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayName("Broj telefona")
+
+                                </dt>
+
+                                <dd>
+                                    @{
+                                        if (Model.Korisnik.PhoneNumber == null)
+                                        {
+                                            <label class="text-secondary"> Nema podatka o telefonu</label>
+                                        }
+                                        else
+                                        {
+                                            @Model.Korisnik.PhoneNumber
+                                        }
+                                    }
+
+                                </dd>
+
+                                @{if (Model.Korisnik.FKorisnik == true)
+                                    {
+                                        <dt>
+                                            @Html.DisplayName("Opis")
+
+                                        </dt>
+
+                                        <dd>
+                                            @{
+                                                if (Model.Korisnik.Opis == null)
+                                                {
+                                                    <label class="text-secondary"> Nema podataka o opisu</label>
+                                                }
+                                                else
+                                                {
+                                                    @Model.Korisnik.Opis
+                                                }
+                                            }
+
+
+
+                                        </dd>
+
+
+
+
+                                        <dt>
+                                            @Html.DisplayName("Rejting") (@Model.Korisnik.Rejting.ToString("f2"))
+
+                                        </dt>
+
+
+                                        <dd>
+
+
+                                            @{
+                                                float broj = (Model.Korisnik.Rejting * 100) / 5;
+                                            }
+                                            <div class="Zvezde">
+                                                <div class="containerdiv  ">
+                                                    <div>
+                                                        <img class="imgStar" src="https://image.ibb.co/jpMUXa/stars_blank.png" alt="img">
+                                                    </div>
+                                                    <div class="cornerimage" style="width:@broj%;">
+                                                        <img class="imgStar" src="https://image.ibb.co/caxgdF/stars_full.png" alt="">
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+                                        </dd>
+                                    }
+                                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            </dl>
+
+
+                            <div>
+                                @Html.ActionLink("Izmeni podatke", "IzmeniPod", new { id = Model.Korisnik.Id })
+
+                            </div>
+                            <div>
+                                @Html.ActionLink("Promeni lozinku", "ChangePassword")
+                            </div>
+                            <div>
+                                @{
+                                    if (Model.Korisnik.FKorisnik == true)
+                                    {
+                                        @Html.ActionLink("Početna", "KorisnikSignedUp", "Korisnik", null, new { @class = "nav item btn fa fa-home" })
+                                    }
+                                    else if (Model.Korisnik.FUpravnikSale == true)
+                                    {
+                                        @Html.ActionLink("Početna", "UpravnikSaleSignedUp", "UpravnikSale", null, new { @class = "nav item btn fa fa-home" })
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink("Početna", "AdministratorSignedUp", "Administrator", null, new { @class = "nav item btn fa fa-home" })
+                                    }
+
+
+                                }
+
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <hr />
+            @if (Model.Korisnik.FKorisnik == true || Model.Korisnik.FUpravnikSale==true)
+            {
+                <h4 class="title" style="margin-left:5%;">Komentari</h4>
+                <hr />
+                if (Model.Komentari.Count() == 0)
+                {
+                    <hr />
+                    <label class="text-danger" style="margin-left:5%;"> Trenutno nemate komentare...</label>
+                    <hr />
+
+                }
+
+
+
+
+                <div class="first">
+                    <div class="scrollingDiv">
+
+
+                        @foreach (var it in Model.Komentari)
+                        {
+
+
+
+
+                            <li class="media">
+                                <a href="#" class="pull-left">
+                                    @{
+                                        var base65 = Convert.ToBase64String(it.SlikaPostavljaca);
+                                        var imgsrc2 = string.Format("data:image/png;base64,{0}", base65);
+
+                                    }
+                                    <img src="@imgsrc2" alt="" class="avatar2 img-circle ">
+
+                                </a>
+                                <div class="media-body">
+                                    <span class="text-muted pull-right">
+
+                                        <small class="badge badge-pill badge-secondary text-wrap" style="width: 6rem;">@it.Datum_Postavljanja</small>
+                                    </span>
+                                    <strong class="text-secondary">@it.ImePostavljaca</strong>
+                                    <p>
+                                        @it.Komentar
+
+                                    </p>
+                                </div>
+
+                            </li>
+                            <hr />
+                        }
+                    </div>
+                </div>
+            }
+
+
+        </div>
+        <!--MODAL-->
+        
+
+
+</body>
+<style>
+            .first {
+                display: inline;
+                width: 98%;
+                height: 100%;
+                margin-left:15px;
+            }
+
+            .second {
+                display: inline;
+                height: 100%;
+                width: 50%;
+            }
+
+            .containerdiv {
+                border: 0;
+                float: left;
+                position: relative;
+                width: 150px;
+                height: 15px;
+            }
+
+            .cornerimage {
+                border: 0;
+                position: absolute;
+                top: 0;
+                left: 0;
+                overflow: hidden;
+            }
+
+            .imgStar {
+                max-width: 150px;
+            }
+
+            .Zvezde {
+                padding-bottom: 20px;
+                padding-top: 10px;
+            }
+
+            .komentar {
+                width: 100%;
+                height: 100px;
+            }
+
+            .avatar2 {
+                vertical-align: middle;
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                border: solid black 1px;
+            }
+
+            .media-body {
+                margin-left: 20px;
+                margin-top: 5px;
+            }
+
+            div.scrollingDiv {
+                max-height: 650px;
+                width: 100%;
+                FLOAT: left;
+                overflow-y: scroll;
+            }
+        </style>
+<footer>
+</footer>
+
+
+

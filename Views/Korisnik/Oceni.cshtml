@@ -1,0 +1,90 @@
+﻿@model KosSala.ViewModels.KomentariView
+
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_LayoutKorisnik.cshtml";
+}
+
+<h2>Profile korisnika</h2>
+<head>
+    <link href="~/Content/stars.css" rel="stylesheet" />
+</head>
+
+
+
+@{ //NEPOTREBNA STRANICA, IZBRISI AKO ZELIS ALI PISE U DOKUMENTACIJI DA POSTOJI STRANICA OVA
+}
+@using (Html.BeginForm("Oceni", "Korisnik", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+
+    @Html.HiddenFor(model => model.idPrimaoca)
+    <head>
+        <link rel="stylesheet" href="~/Content/stars.css" type="text/css" />
+    </head>
+    <body>
+        <<div class="container">
+            <div class="card border-0 shadow my-5">
+                <div class="card-body p-5">
+
+                    <form class="forma">
+                        <div class="rating2">
+                            <fieldset class="ratng">
+                                @Html.RadioButtonFor(m => m.valueRadio, 5, new { id = "star5" })
+                                <label for="star5">5 </label>
+
+                                @Html.RadioButtonFor(m => m.valueRadio, 4, new { id = "star4" })
+                                <label for="star4">4 </label>
+
+                                @Html.RadioButtonFor(m => m.valueRadio, 3, new { id = "star3" })
+                                <label for="star3">3 </label>
+
+                                @Html.RadioButtonFor(m => m.valueRadio, 2, new { id = "star2" })
+                                <label for="star2">2 </label>
+
+                                @Html.RadioButtonFor(m => m.valueRadio, 1, new { id = "star1" })
+                                <label for="star1">1 </label>
+
+
+
+
+                            </fieldset>
+                        </div>
+
+                        <br />
+                        <hr />
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" class="btn btn-default" value="Oceni" />
+                            </div>
+                        </div>
+                        <span id="rating"></span>
+                    </form>
+                </div>
+                <div class="modal-footer">
+
+
+                    <button type="button" id="btnHideModal" class="btn btn-primary button button4">
+                        Nazad
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </body>
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="~/Content/NovaTema/bootstrapNOVATEMA.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+
+@{ //deo za zvezdice---------------------------------------------------------}}
+}
+
+
+
+
+
+

@@ -1,0 +1,360 @@
+﻿@model KosSala.ViewModels.SalaProfile
+
+@{
+    ViewBag.Title = "SalaProfile";
+    Layout = "~/Views/Shared/_LayoutKorisnik.cshtml";
+}
+
+<h2>SalaProfile</h2>
+
+<body>
+    <<div class="container">
+        <div class="card border-0 shadow my-5">
+            <div class="card-body p-5">
+
+
+
+
+                <!-- Page Content -->
+                <div class="container">
+
+                    <!-- Portfolio Item Heading -->
+                    <h1 class="my-4">
+                        @Model.Sala.Naziv
+
+                    </h1>
+                    @{
+                        var base64 = Convert.ToBase64String(Model.Sala.Slika);
+                        var imgsrc = string.Format("data:image/png;base64,{0}", base64);
+                    }
+
+                    <!-- Portfolio Item Row -->
+                    <div class="row">
+
+                        <div class="col-md-8">
+                            <img class="img-fluid" src="@imgsrc" alt="" style="padding-right:1px;">
+                        </div>
+
+                        <div class="col-md-4">
+                            <h3 class="my-3" style="text-align:center">Opis</h3>
+                            <hr />
+                            <p style="text-align:center">@Model.Sala.Opis</p>
+                            <h3 class="my-3" style="text-align:center">Osnovne informacije</h3>
+                            <hr />
+                            <ul>
+                                <li> Lokacija:</h6> @Model.Sala.Lokacija</li>
+                                <li>
+                                    Rejting: (@Model.Sala.Rejting.ToString("f2"))
+
+                                    @{
+                                        float broj = (float)(Model.Sala.Rejting * 100) / 5;
+
+                                    }
+                                    <div class="Zvezde">
+                                        <div class="containerdiv  ">
+                                            <div>
+                                                <img class="imgStar" src="https://image.ibb.co/jpMUXa/stars_blank.png" alt="img">
+                                            </div>
+                                            <div class="cornerimage" style="width:@broj%;">
+                                                <img class="imgStar" src="https://image.ibb.co/caxgdF/stars_full.png" alt="">
+                                            </div>
+                                        </div>
+
+                                </li>
+                                @{if (Model.Upravnik == null)
+                                    {
+
+
+                                    }
+                                    else
+                                    {
+                                        <li><h4>Podaci upravnika sale: </h4> @Model.Upravnik.Ime @Model.Upravnik.Prezime</li>
+                                        <hr />
+                                        <li>Username: @Model.Upravnik.UserName</li>
+                                        <li>Email: @Model.Upravnik.Email</li>
+                                        <li>
+                                            Broj Telefona: @{if (@Model.Upravnik.PhoneNumber == null)
+                                                {<label class="text-danger">Nema podataka o telefonu </label> }
+                                                else
+                                                { @Model.Upravnik.PhoneNumber } }
+                                        </li>
+
+                                    }
+                                }
+
+
+
+
+                            </ul>
+                            @{ if (@TempData.ContainsKey("neocenjena"))
+                                { <button type="button" class="btn btn-primary fa fa-star" data-toggle="modal" data-target="#Oceni" style="margin-left:35%"> Oceni</button>
+                                    TempData.Remove("neocenjena");
+                                }
+                                else
+                                { <button type="button" class="btn btn-primary fa fa-star" data-toggle="modal" data-target="#Oceni" style="margin-left:15%" disabled> Oceni</button> <label class="text-danger d-inline">Već ste ocenili salu</label>}}
+
+                        </div>
+
+                        <div>
+
+
+                        </div>
+                        <div class="modal fade" id="Oceni" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Oceni sportsku salu</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+
+
+
+
+                                        @{ //POP UP part with rating stars
+                                        }
+                                        @using (Html.BeginForm("OceniSalu", "Korisnik", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                        {
+
+                                            @Html.HiddenFor(model => model.IdPrimaoca)
+                                            <head>
+                                                <link rel="stylesheet" href="~/Content/stars.css" type="text/css" />
+                                            </head>
+
+
+                                            <form class="forma">
+                                                <div class="rating2">
+                                                    <fieldset class="ratingStars">
+                                                        @Html.RadioButtonFor(m => m.valueRadio, 5, new { id = "star5" })
+                                                        <label for="star5"> </label>
+
+                                                        @Html.RadioButtonFor(m => m.valueRadio, 4, new { id = "star4" })
+                                                        <label for="star4"> </label>
+
+                                                        @Html.RadioButtonFor(m => m.valueRadio, 3, new { id = "star3" })
+                                                        <label for="star3"> </label>
+
+                                                        @Html.RadioButtonFor(m => m.valueRadio, 2, new { id = "star2" })
+                                                        <label for="star2"> </label>
+
+                                                        @Html.RadioButtonFor(m => m.valueRadio, 1, new { id = "star1" })
+                                                        <label for="star1"> </label>
+
+                                                    </fieldset>
+                                                </div>
+
+
+                                                <div style="width:100%">
+                                                    <input type="submit" class="btn btn-default pull-left" value="Oceni" />
+                                                    <button type="button" class="btn btn-secondary pull-right" data-dismiss="modal">Zatvori</button>
+                                                </div>
+
+
+                                            </form>
+
+                                        }
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- /.row -->
+                        <!-- Related Projects Row -->
+
+
+
+                    </div>
+
+
+
+                    <!-- /.row -->
+                    <!-- /.container -->
+                    @using (Html.BeginForm("KomentarisiSalu", "Korisnik", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.IdPrimaoca)
+                        <h4 style="padding-top:50px;">Komentarisi salu</h4>
+                        <hr />
+
+                        <div class="panel-body">
+
+
+
+                            @Html.TextAreaFor(m => m.Komentar, new { @class = "komentar form-control" }
+
+    )                           <br>
+                            <input type="submit" class="btn btn-info pull-right " id="dugme" value="Postavi" />
+                            <div class="clearfix"></div>
+
+                            <ul class="media-list"></ul>
+
+
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="col-md-offset-2 col-md-10">
+
+                            </div>
+                        </div>
+
+                    }
+
+                    <h3>Komentari</h3>
+                    <hr />
+                    @{
+                        if (Model.Komentari.Count() == 0)
+                        {
+                            <label class="text-danger"> Trenutno nema komentara...</label>
+
+                        }
+                    }
+                    <div class="scrollingDiv">
+                        @foreach (var it in Model.Komentari)
+                        {
+
+                            var base644 = Convert.ToBase64String(it.SlikaPostavljaca);
+                            var imgsrcc = string.Format("data:image/png;base64,{0}", base644);
+
+
+                            <li class="media">
+                                <a href="#" class="pull-left">
+                                    <img src="@imgsrcc" alt="" class="avatar2 img-circle ">
+
+                                </a>
+                                <div class="media-body">
+                                    <span class="text-muted pull-right">
+                                        <small class="badge badge-pill badge-secondary text-wrap" style="width: 6rem;">@it.Datum_Postavljanja</small>
+                                    </span>
+                                    <strong class="text-secondary">@it.ImePostavljaca</strong>
+                                    <p>
+                                        @it.Komentar
+
+                                    </p>
+                                </div>
+
+                            </li>
+                            <hr />
+                        }
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+$(document).ready(function(){
+    $('#dugme').attr('disabled','disabled');
+
+    $('#Komentar').change(function() {
+    if($(this).val() != '') {
+        $('#dugme').removeAttr('disabled');
+    }
+    else {
+        $('#dugme').attr('disabled','disabled');
+    }
+});
+});
+    </script>
+<style>
+    .ratingStars {
+        float: left;
+        border: none;
+    }
+
+        .ratingStars:not(:checked) > input {
+            position: absolute;
+            top: -9999px;
+            clip: rect(0, 0, 0, 0);
+        }
+
+        .ratingStars:not(:checked) > label {
+            float: right;
+            width: 1em;
+            padding: 0 .1em;
+            overflow: hidden;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 500%;
+            line-height: 1.6;
+            color: #ddd;
+        }
+
+            .ratingStars:not(:checked) > label:before {
+                content: '★ ';
+                font-size: 60px
+            }
+
+        .ratingStars > input:checked ~ label {
+            color: #f70;
+        }
+
+        .ratingStars:not(:checked) > label:hover, .ratingStars:not(:checked) > label:hover ~ label {
+            color: gold;
+        }
+
+        .ratingStars > input:checked + label:hover, .rating > input:checked + label:hover ~ label, .rating > input:checked ~ label:hover, .rating > input:checked ~ label:hover ~ label, .ratingStars > label:hover ~ input:checked ~ label {
+            color: #ea0;
+        }
+
+        .ratingStars > label:active {
+            position: relative;
+        }
+
+    .avatar2 {
+        vertical-align: middle;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: solid black 1px;
+    }
+
+    .media-body {
+        margin-left: 20px;
+        margin-top: 5px;
+    }
+
+    div.scrollingDiv {
+        max-height: 650px;
+        width: 100%;
+        FLOAT: left;
+        overflow-y: scroll;
+    }
+
+    .komentar {
+        width: 100%;
+        height: 100px;
+    }
+
+    .containerdiv {
+        border: 0;
+        float: left;
+        position: relative;
+        width: 150px;
+        height: 15px;
+    }
+
+    .cornerimage {
+        border: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+    }
+
+    .imgStar {
+        max-width: 150px;
+    }
+
+    .Zvezde {
+        padding-bottom: 40px;
+        padding-top: 10px;
+    }
+</style>
+

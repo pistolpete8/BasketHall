@@ -1,0 +1,42 @@
+﻿@model KosSala.Models.Komentari
+
+@{
+    ViewBag.Title = "Komentar";
+    Layout = "~/Views/Shared/_LayoutKorisnik.cshtml";
+}
+
+<h2>Komentar</h2>
+
+<body>
+    <<div class="container">
+    <div class="card border-0 shadow my-5">
+        <div class="card-body p-5">
+
+
+            @using (Html.BeginForm("Komentarisi", "Korisnik", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <h4>Komentarisi korisnika</h4>
+                <hr />
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Komentar, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Komentar, new { @class = "form-control" })
+                    </div>
+
+
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" class="btn btn-default" value="Komentarisi" />
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>
+    </body>

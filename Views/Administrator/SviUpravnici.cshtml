@@ -1,0 +1,206 @@
+﻿@model KosSala.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "SviUpravnici";
+    Layout = "~/Views/Shared/_LayoutAdministrator.cshtml";
+}
+
+<h2>SviUpravnici</h2>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="~/Content/Datatables/jquery.dataTables.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <script src="~/Content/DatePicker/notify.min.js"></script>
+    <script src="~/Content/DatePicker/jquery.datetimepicker.full.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+</head>
+<body>
+    <<div class="container">
+        <div class="card border-0 shadow my-5">
+            <div class="card-body p-5">
+
+                <h3> Svi upravnici </h3>
+                <a class="btn btn-default" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("DodajEditUpravnik","Administrator")')"><i class="fa fa-plus"></i>Dodaj upravnika</a>
+                <hr />
+
+                <table id="myTablee" class="display table table-responsive-lg" style="width:100%">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th></th>
+                            <th>Korisničko ime</th>
+                            <th>Ime</th>
+                            <th>Prezime</th>
+                            <th>Email</th>
+                            <th>Broj telefona</th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    <tfoot class="thead-dark">
+                        <tr>
+                            <th>Slika</th>
+                            <th>Korisničko ime</th>
+                            <th>Ime</th>
+                            <th>Prezime</th>
+                            <th>Email</th>
+                            <th>Broj telefona</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<!--Obican izgled tabele:     //cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet  -->
+
+
+
+
+@section scripts{
+
+
+    <script>
+                    var Popup,table,pom, pom1;
+            $(document).ready(function () {
+                table = $('#myTablee').DataTable({
+
+                    "ajax": {
+                        "url": "/Administrator/PrikaziUpravnike",
+                        "type": "GET",
+                        "datatype": "json"
+                    },
+
+                    "columns": [
+                        {data: "SlikaString", "autoWidth": true, "render": function (data) {
+
+                      return '<img src="'+data+'" width="45" height="45"  />'
+
+                         }
+                        },
+                        { "data": "UserName", "autoWidth": true },
+                        {
+                            "data": "Ime", "autoWidth":true
+                        },
+                        { "data": "Prezime", "autoWidth": true },
+                        { "data": "Email", "autoWidth": true },
+                        { "data": "PhoneNumber", "autoWidth": true },
+
+
+
+
+                        {
+                            "data": "Id", "render": function (data) {
+
+                                return "<a class='btn btn-default btn-sm' onclick=PopupForm('@Url.Action("DodajEditUpravnik","Administrator")/" + data + "')><i class='fa fa-pencil'></i>Izmeni</a>\<a class='btn btn-danger btn-sm' onclick=PopupFormObrisi('@Url.Action("Obrisi","Administrator")/" + data + "')><i class='fa fa-trash'></i>Obriši</a>" 
+                        },
+                            "orderable": false,
+                            "width": "150px",
+                            "searchable":false
+                        }
+
+
+
+                    ], "order": [[1, 'asc']], "language": { "emptyTable": "Trenutno nema podataka" }
+
+
+                });
+
+            });
+
+    function PopupForm(url) {
+
+        var formDiv = $('<div/>');
+        $.get(url)
+            .done(function (response) {
+                formDiv.html(response);
+
+                Popup = formDiv.dialog({
+                    autoOpen: true,
+                    resizable: true,
+                    title: 'Popuni detalje',
+                    height: 500,
+                    width: 900,
+                     modal: true,
+                    show: "blind",
+                    hide: "blind",
+                    dialogClass: 'noPadding',
+                    close: function () {
+                        Popup.dialog('destroy').remove();
+                    }
+                });
+
+
+            });
+
+        }
+
+        function PopupFormObrisi(url) {
+
+        var formDiv = $('<div/>');
+        $.get(url)
+            .done(function (response) {
+                formDiv.html(response);
+
+                Popup = formDiv.dialog({
+                    autoOpen: true,
+                    resizable: true,
+                    title: 'Brisanje',
+                    height: 180,
+                    width: 350,
+                    close: function () {
+                        Popup.dialog('destroy').remove();
+                    }
+                });
+
+
+            });
+
+              }
+
+    function SubmitForm(form) {
+
+        $.validator.unobtrusive.parse(form);
+        if ($(form).valid()) {
+            $.ajax({
+                type: "POST",
+                url: form.action,
+                data: $(form).serialize(),
+
+                success: function (data) {
+                    if (data.success) {
+                        Popup.dialog('close');
+                        table.ajax.reload();
+
+                        $.notify(data.message, {
+                            globalPostion: "top center",
+                            className: "success"
+                        })
+
+                    }
+
+                }
+            });
+        }
+        return false;
+        }
+
+    
+
+
+    </script>
+    <style>
+        .table td {
+            vertical-align: middle;
+     font-size: 15px;
+    font-family: Bahnschrift;
+        }
+    </style>
+}

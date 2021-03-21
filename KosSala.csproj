@@ -1,0 +1,788 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E12B8A10-2C05-4179-9B17-83CBB7682C83}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KosSala</RootNamespace>
+    <AssemblyName>KosSala</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44391</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>3.4</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FoolproofValidation, Version=0.9.5851.39121, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Foolproof.0.9.4518\lib\net45\FoolproofValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Activities" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>packages\Microsoft.AspNet.Identity.Owin.2.2.2\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>packages\Microsoft.Owin.Host.SystemWeb.4.0.0\lib\net451\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>packages\Microsoft.Owin.Security.4.0.0\lib\net451\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>packages\Microsoft.Owin.Security.Facebook.4.0.0\lib\net451\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>packages\Microsoft.Owin.Security.Cookies.4.0.0\lib\net451\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>packages\Microsoft.Owin.Security.Google.4.0.0\lib\net451\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>packages\Microsoft.Owin.Security.Twitter.4.0.0\lib\net451\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>packages\Microsoft.Owin.Security.MicrosoftAccount.4.0.0\lib\net451\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>packages\Microsoft.Owin.Security.OAuth.4.0.0\lib\net451\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdministratorController.cs" />
+    <Compile Include="Controllers\ApplicationUserController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KorisnikController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UpravnikSaleController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004121509270_PrvaMigracija.cs" />
+    <Compile Include="Migrations\202004121509270_PrvaMigracija.Designer.cs">
+      <DependentUpon>202004121509270_PrvaMigracija.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004131134334_V1.cs" />
+    <Compile Include="Migrations\202004131134334_V1.Designer.cs">
+      <DependentUpon>202004131134334_V1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004141541064_Komentari.cs" />
+    <Compile Include="Migrations\202004141541064_Komentari.Designer.cs">
+      <DependentUpon>202004141541064_Komentari.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004141626403_TabelaKomentari.cs" />
+    <Compile Include="Migrations\202004141626403_TabelaKomentari.Designer.cs">
+      <DependentUpon>202004141626403_TabelaKomentari.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004151027243_PoboljsanjeKomentara.cs" />
+    <Compile Include="Migrations\202004151027243_PoboljsanjeKomentara.Designer.cs">
+      <DependentUpon>202004151027243_PoboljsanjeKomentara.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004151714567_BrojOcena.cs" />
+    <Compile Include="Migrations\202004151714567_BrojOcena.Designer.cs">
+      <DependentUpon>202004151714567_BrojOcena.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004161841194_DodatakModel.cs" />
+    <Compile Include="Migrations\202004161841194_DodatakModel.Designer.cs">
+      <DependentUpon>202004161841194_DodatakModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004171751259_PromenaDateTime.cs" />
+    <Compile Include="Migrations\202004171751259_PromenaDateTime.Designer.cs">
+      <DependentUpon>202004171751259_PromenaDateTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004181125231_PromenaUpravnikId.cs" />
+    <Compile Include="Migrations\202004181125231_PromenaUpravnikId.Designer.cs">
+      <DependentUpon>202004181125231_PromenaUpravnikId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004181155394_Pr.cs" />
+    <Compile Include="Migrations\202004181155394_Pr.Designer.cs">
+      <DependentUpon>202004181155394_Pr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004211654460_IzmenaDa.cs" />
+    <Compile Include="Migrations\202004211654460_IzmenaDa.Designer.cs">
+      <DependentUpon>202004211654460_IzmenaDa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004211701217_errormsg.cs" />
+    <Compile Include="Migrations\202004211701217_errormsg.Designer.cs">
+      <DependentUpon>202004211701217_errormsg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004251337503_SlikaKorisnik.cs" />
+    <Compile Include="Migrations\202004251337503_SlikaKorisnik.Designer.cs">
+      <DependentUpon>202004251337503_SlikaKorisnik.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006291529070_Dopuna.cs" />
+    <Compile Include="Migrations\202006291529070_Dopuna.Designer.cs">
+      <DependentUpon>202006291529070_Dopuna.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006291635275_Dopuna1.cs" />
+    <Compile Include="Migrations\202006291635275_Dopuna1.Designer.cs">
+      <DependentUpon>202006291635275_Dopuna1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006291750403_urke.cs" />
+    <Compile Include="Migrations\202006291750403_urke.Designer.cs">
+      <DependentUpon>202006291750403_urke.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006292032463_IzmeneKorisnikTermin.cs" />
+    <Compile Include="Migrations\202006292032463_IzmeneKorisnikTermin.Designer.cs">
+      <DependentUpon>202006292032463_IzmeneKorisnikTermin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007021754524_NovaKlasa.cs" />
+    <Compile Include="Migrations\202007021754524_NovaKlasa.Designer.cs">
+      <DependentUpon>202007021754524_NovaKlasa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007021756192_novaIzmena.cs" />
+    <Compile Include="Migrations\202007021756192_novaIzmena.Designer.cs">
+      <DependentUpon>202007021756192_novaIzmena.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007021802175_NoviProp.cs" />
+    <Compile Include="Migrations\202007021802175_NoviProp.Designer.cs">
+      <DependentUpon>202007021802175_NoviProp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007021817064_NewClasss.cs" />
+    <Compile Include="Migrations\202007021817064_NewClasss.Designer.cs">
+      <DependentUpon>202007021817064_NewClasss.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Class11.cs" />
+    <Compile Include="Models\CustomAuthorizeAttribute.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Komentari.cs" />
+    <Compile Include="Models\KorisnikTermin.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\NovaKlasa.cs" />
+    <Compile Include="Models\Ocene.cs" />
+    <Compile Include="Models\Sala.cs" />
+    <Compile Include="Models\Termin.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AdminStatistic.cs" />
+    <Compile Include="ViewModels\KomentariView.cs" />
+    <Compile Include="ViewModels\KorisnikIzm.cs" />
+    <Compile Include="ViewModels\KorisnikSl.cs" />
+    <Compile Include="ViewModels\NavbarSlika.cs" />
+    <Compile Include="ViewModels\SalaIzm.cs" />
+    <Compile Include="ViewModels\SalaProfile.cs" />
+    <Compile Include="ViewModels\SaleView.cs" />
+    <Compile Include="ViewModels\TerminiView.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Client Scripts\mvcfoolproof.unobtrusive.js" />
+    <Content Include="Client Scripts\mvcfoolproof.unobtrusive.min.js" />
+    <Content Include="Client Scripts\MvcFoolproofJQueryValidation.js" />
+    <Content Include="Client Scripts\MvcFoolproofJQueryValidation.min.js" />
+    <Content Include="Client Scripts\MvcFoolproofValidation.js" />
+    <Content Include="Client Scripts\MvcFoolproofValidation.min.js" />
+    <Content Include="Content\AdminPage\player1.jpg" />
+    <Content Include="Content\AdminPage\sala1.jpg" />
+    <Content Include="Content\AdminPage\termin1.jpg" />
+    <Content Include="Content\AdminPage\upravnik1.jpg" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\carousel\players.jpg" />
+    <Content Include="Content\carousel\sale.jpg" />
+    <Content Include="Content\carousel\termin.jpg" />
+    <Content Include="Content\css\grayscale.css" />
+    <Content Include="Content\css\grayscale.min.css" />
+    <Content Include="Content\Datatables\jquery.dataTables.min.css" />
+    <Content Include="Content\Datatables\jquery.dataTables.min.js" />
+    <Content Include="Content\DatePicker\newThemeTest\jquery-ui.css" />
+    <Content Include="Content\DatePicker\newThemeTest\jquery-ui.js" />
+    <Content Include="Content\DatePicker\newThemeTest\jquery-ui.min.css" />
+    <Content Include="Content\DatePicker\newThemeTest\jquery-ui.min.js" />
+    <Content Include="Content\DatePicker\newThemeTest\jquery-ui.structure.css" />
+    <Content Include="Content\DatePicker\newThemeTest\jquery-ui.structure.min.css" />
+    <Content Include="Content\DatePicker\newThemeTest\jquery-ui.theme.css" />
+    <Content Include="Content\DatePicker\newThemeTest\jquery-ui.theme.min.css" />
+    <Content Include="Content\DefaultPictures\defaultSala.png" />
+    <Content Include="Content\DefaultPictures\defaultUser.png" />
+    <Content Include="Content\heroic-features.css" />
+    <Content Include="Content\img\ballers.png" />
+    <Content Include="Content\img\ballers1.png" />
+    <Content Include="Content\img\ballers2.png" />
+    <Content Include="Content\img\bg-masterhead.png" />
+    <Content Include="Content\img\bg-masthead.jpg" />
+    <Content Include="Content\img\bg-signup.jpg" />
+    <Content Include="Content\img\demo-image-01.jpeg" />
+    <Content Include="Content\img\demo-image-02.jpg" />
+    <Content Include="Content\img\ipad.png" />
+    <Content Include="Content\DatePicker\jquery-ui.min.css" />
+    <Content Include="Content\DatePicker\jquery-ui.min.js" />
+    <Content Include="Content\DatePicker\jquery.datetimepicker.full.js" />
+    <Content Include="Content\DatePicker\jquery.datetimepicker.min.css" />
+    <Content Include="Content\js\grayscale.js" />
+    <Content Include="Content\js\grayscale.min.js" />
+    <Content Include="Content\Login\bg-01.jpg" />
+    <Content Include="Content\Login\bg-02.jpg" />
+    <Content Include="Content\Login\bootstrap.bundle.min.js" />
+    <Content Include="Content\Login\bootstrap.min.css" />
+    <Content Include="Content\Login\jquery.slim.js" />
+    <Content Include="Content\Login\loginNotiffication.css" />
+    <Content Include="Content\Login\style.css" />
+    <Content Include="Content\Login\style1.css" />
+    <Content Include="Content\DatePicker\notify.min.js" />
+    <Content Include="Content\logo\bhlogo.PNG" />
+    <Content Include="Content\NovaTema\bootstrapNOVATEMA.bundle.min.js" />
+    <Content Include="Content\NovaTema\bootstrapNOVATEMA.min.css" />
+    <Content Include="Content\NovaTema\css.css" />
+    <Content Include="Content\NovaTema\jqueryNOVATEMA.slim.min.js" />
+    <Content Include="Content\NovaTema\logo-avatar-navbar.css" />
+    <Content Include="Content\PictureUploadProfile\JavaScript.js" />
+    <Content Include="Content\PictureUploadProfile\StyleSheet1.css" />
+    <Content Include="Content\PictureUploadProfile\StyleSheet2.css" />
+    <Content Include="Content\PrikazSala\csss\heroic-features.css" />
+    <Content Include="Content\PrikazSala\gulpfile.js" />
+    <Content Include="Content\PrikazSala\vvendor\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="Content\PrikazSala\vvendor\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="Content\PrikazSala\vvendor\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="Content\PrikazSala\vvendor\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="Content\PrikazSala\vvendor\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\PrikazSala\vvendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\PrikazSala\vvendor\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="Content\PrikazSala\vvendor\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="Content\PrikazSala\vvendor\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\PrikazSala\vvendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\PrikazSala\vvendor\jquery\jquery.js" />
+    <Content Include="Content\PrikazSala\vvendor\jquery\jquery.min.js" />
+    <Content Include="Content\PrikazSala\vvendor\jquery\jquery.slim.js" />
+    <Content Include="Content\PrikazSala\vvendor\jquery\jquery.slim.min.js" />
+    <Content Include="Content\Stars\rating.css" />
+    <Content Include="Content\table\main.css" />
+    <Content Include="Content\table\util.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\vendor\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="Content\vendor\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="Content\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\vendor\fontawesome-free\css\all.css" />
+    <Content Include="Content\vendor\fontawesome-free\css\all.min.css" />
+    <Content Include="Content\vendor\fontawesome-free\css\brands.css" />
+    <Content Include="Content\vendor\fontawesome-free\css\brands.min.css" />
+    <Content Include="Content\vendor\fontawesome-free\css\fontawesome.css" />
+    <Content Include="Content\vendor\fontawesome-free\css\fontawesome.min.css" />
+    <Content Include="Content\vendor\fontawesome-free\css\regular.css" />
+    <Content Include="Content\vendor\fontawesome-free\css\regular.min.css" />
+    <Content Include="Content\vendor\fontawesome-free\css\solid.css" />
+    <Content Include="Content\vendor\fontawesome-free\css\solid.min.css" />
+    <Content Include="Content\vendor\fontawesome-free\css\svg-with-js.css" />
+    <Content Include="Content\vendor\fontawesome-free\css\svg-with-js.min.css" />
+    <Content Include="Content\vendor\fontawesome-free\css\v4-shims.css" />
+    <Content Include="Content\vendor\fontawesome-free\css\v4-shims.min.css" />
+    <Content Include="Content\vendor\fontawesome-free\webfonts\fa-brands-400.svg" />
+    <Content Include="Content\vendor\fontawesome-free\webfonts\fa-regular-400.svg" />
+    <Content Include="Content\vendor\fontawesome-free\webfonts\fa-solid-900.svg" />
+    <Content Include="Content\vendor\jquery-easing\jquery.easing.compatibility.js" />
+    <Content Include="Content\vendor\jquery-easing\jquery.easing.js" />
+    <Content Include="Content\vendor\jquery-easing\jquery.easing.min.js" />
+    <Content Include="Content\vendor\jquery\jquery.js" />
+    <Content Include="Content\vendor\jquery\jquery.min.js" />
+    <Content Include="Content\vendor\jquery\jquery.slim.js" />
+    <Content Include="Content\vendor\jquery\jquery.slim.min.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Pics\Basketball-generic.jpg" />
+    <Content Include="Pics\bg-masterhead.png" />
+    <Content Include="Pics\bg-signup.jpg" />
+    <Content Include="Pics\demo-image-01.jpeg" />
+    <Content Include="Pics\demo-image-02.jpeg" />
+    <Content Include="Pics\ecopetit.cat-court-wallpaper-819386 %281%29.png" />
+    <Content Include="Pics\ipad.png" />
+    <Content Include="Pics\logo3.solo.PNG" />
+    <Content Include="Pics\logoBH2.PNG" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\index.js.flow" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Content\vendor\bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="Content\vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Content\vendor\bootstrap\js\bootstrap.js.map" />
+    <Content Include="Content\vendor\bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="Content\vendor\fontawesome-free\webfonts\fa-brands-400.eot" />
+    <Content Include="Content\vendor\fontawesome-free\webfonts\fa-brands-400.ttf" />
+    <Content Include="Content\vendor\fontawesome-free\webfonts\fa-brands-400.woff" />
+    <Content Include="Content\vendor\fontawesome-free\webfonts\fa-brands-400.woff2" />
+    <Content Include="Content\vendor\fontawesome-free\webfonts\fa-regular-400.eot" />
+    <Content Include="Content\vendor\fontawesome-free\webfonts\fa-regular-400.ttf" />
+    <Content Include="Content\vendor\fontawesome-free\webfonts\fa-regular-400.woff" />
+    <Content Include="Content\vendor\fontawesome-free\webfonts\fa-regular-400.woff2" />
+    <Content Include="Content\vendor\fontawesome-free\webfonts\fa-solid-900.eot" />
+    <Content Include="Content\vendor\fontawesome-free\webfonts\fa-solid-900.ttf" />
+    <Content Include="Content\vendor\fontawesome-free\webfonts\fa-solid-900.woff" />
+    <Content Include="Content\vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
+    <Content Include="Content\vendor\jquery\jquery.min.map" />
+    <Content Include="Content\vendor\jquery\jquery.slim.min.map" />
+    <Content Include="Content\PrikazSala\vvendor\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="Content\PrikazSala\vvendor\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="Content\PrikazSala\vvendor\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="Content\PrikazSala\vvendor\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\PrikazSala\vvendor\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Content\PrikazSala\vvendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Content\PrikazSala\vvendor\bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="Content\PrikazSala\vvendor\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Content\PrikazSala\vvendor\bootstrap\js\bootstrap.js.map" />
+    <Content Include="Content\PrikazSala\vvendor\bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="Content\PrikazSala\vvendor\jquery\jquery.min.map" />
+    <Content Include="Content\PrikazSala\vvendor\jquery\jquery.slim.min.map" />
+    <Content Include="Content\PrikazSala\package-lock.json" />
+    <Content Include="Content\PrikazSala\package.json" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.bootstrap.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.bootstrap.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\src\index.js" />
+    <Content Include="Scripts\src\methods\defaults.js" />
+    <Content Include="Scripts\src\methods\destroy.js" />
+    <Content Include="Scripts\src\methods\disableEventListeners.js" />
+    <Content Include="Scripts\src\methods\enableEventListeners.js" />
+    <Content Include="Scripts\src\methods\placements.js" />
+    <Content Include="Scripts\src\methods\update.js" />
+    <Content Include="Scripts\src\modifiers\applyStyle.js" />
+    <Content Include="Scripts\src\modifiers\arrow.js" />
+    <Content Include="Scripts\src\modifiers\computeStyle.js" />
+    <Content Include="Scripts\src\modifiers\flip.js" />
+    <Content Include="Scripts\src\modifiers\hide.js" />
+    <Content Include="Scripts\src\modifiers\index.js" />
+    <Content Include="Scripts\src\modifiers\inner.js" />
+    <Content Include="Scripts\src\modifiers\keepTogether.js" />
+    <Content Include="Scripts\src\modifiers\offset.js" />
+    <Content Include="Scripts\src\modifiers\preventOverflow.js" />
+    <Content Include="Scripts\src\modifiers\shift.js" />
+    <Content Include="Scripts\src\utils\clockwise.js" />
+    <Content Include="Scripts\src\utils\computeAutoPlacement.js" />
+    <Content Include="Scripts\src\utils\debounce.js" />
+    <Content Include="Scripts\src\utils\find.js" />
+    <Content Include="Scripts\src\utils\findCommonOffsetParent.js" />
+    <Content Include="Scripts\src\utils\findIndex.js" />
+    <Content Include="Scripts\src\utils\getBordersSize.js" />
+    <Content Include="Scripts\src\utils\getBoundaries.js" />
+    <Content Include="Scripts\src\utils\getBoundingClientRect.js" />
+    <Content Include="Scripts\src\utils\getClientRect.js" />
+    <Content Include="Scripts\src\utils\getFixedPositionOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetRect.js" />
+    <Content Include="Scripts\src\utils\getOffsetRectRelativeToArbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getOppositePlacement.js" />
+    <Content Include="Scripts\src\utils\getOppositeVariation.js" />
+    <Content Include="Scripts\src\utils\getOuterSizes.js" />
+    <Content Include="Scripts\src\utils\getParentNode.js" />
+    <Content Include="Scripts\src\utils\getPopperOffsets.js" />
+    <Content Include="Scripts\src\utils\getReferenceNode.js" />
+    <Content Include="Scripts\src\utils\getReferenceOffsets.js" />
+    <Content Include="Scripts\src\utils\getRoot.js" />
+    <Content Include="Scripts\src\utils\getRoundedOffsets.js" />
+    <Content Include="Scripts\src\utils\getScroll.js" />
+    <Content Include="Scripts\src\utils\getScrollParent.js" />
+    <Content Include="Scripts\src\utils\getStyleComputedProperty.js" />
+    <Content Include="Scripts\src\utils\getSupportedPropertyName.js" />
+    <Content Include="Scripts\src\utils\getViewportOffsetRectRelativeToArtbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getWindow.js" />
+    <Content Include="Scripts\src\utils\getWindowSizes.js" />
+    <Content Include="Scripts\src\utils\includeScroll.js" />
+    <Content Include="Scripts\src\utils\index.js" />
+    <Content Include="Scripts\src\utils\isBrowser.js" />
+    <Content Include="Scripts\src\utils\isFixed.js" />
+    <Content Include="Scripts\src\utils\isFunction.js" />
+    <Content Include="Scripts\src\utils\isIE.js" />
+    <Content Include="Scripts\src\utils\isModifierEnabled.js" />
+    <Content Include="Scripts\src\utils\isModifierRequired.js" />
+    <Content Include="Scripts\src\utils\isNumeric.js" />
+    <Content Include="Scripts\src\utils\isOffsetContainer.js" />
+    <Content Include="Scripts\src\utils\removeEventListeners.js" />
+    <Content Include="Scripts\src\utils\runModifiers.js" />
+    <Content Include="Scripts\src\utils\setAttributes.js" />
+    <Content Include="Scripts\src\utils\setStyles.js" />
+    <Content Include="Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_LayoutMain.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\AuthorizeFailed.cshtml" />
+    <Content Include="Views\ApplicationUser\Create.cshtml" />
+    <Content Include="Views\ApplicationUser\Delete.cshtml" />
+    <Content Include="Views\ApplicationUser\Details.cshtml" />
+    <Content Include="Views\ApplicationUser\Edit.cshtml" />
+    <Content Include="Views\ApplicationUser\Index.cshtml" />
+    <Content Include="Views\ApplicationUser\Proba.cshtml" />
+    <Content Include="Views\ApplicationUser\DodajKom.cshtml" />
+    <Content Include="Views\Korisnik\Create.cshtml" />
+    <Content Include="Views\Korisnik\Delete.cshtml" />
+    <Content Include="Views\Korisnik\Details.cshtml" />
+    <Content Include="Views\Korisnik\Edit.cshtml" />
+    <Content Include="Views\Korisnik\Index.cshtml" />
+    <Content Include="Views\Administrator\Create.cshtml" />
+    <Content Include="Views\Administrator\Delete.cshtml" />
+    <Content Include="Views\Administrator\Details.cshtml" />
+    <Content Include="Views\Administrator\Edit.cshtml" />
+    <Content Include="Views\Administrator\Index.cshtml" />
+    <Content Include="Views\UpravnikSale\Delete.cshtml" />
+    <Content Include="Views\UpravnikSale\Details.cshtml" />
+    <Content Include="Views\UpravnikSale\Edit.cshtml" />
+    <Content Include="Views\UpravnikSale\Index.cshtml" />
+    <Content Include="Views\Korisnik\KorisnikSignedUp.cshtml" />
+    <Content Include="Views\Administrator\AdministratorSignedUp.cshtml" />
+    <Content Include="Views\UpravnikSale\UpravnikSaleSignedUp.cshtml" />
+    <Content Include="Views\Shared\_LayoutKorisnik.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdministrator.cshtml" />
+    <Content Include="Views\Shared\LayoutMenage.cshtml" />
+    <Content Include="Views\Korisnik\Profile.cshtml" />
+    <Content Include="Views\Korisnik\Komentarisi.cshtml" />
+    <Content Include="Views\Korisnik\Oceni.cshtml" />
+    <Content Include="Views\Manage\ProfileAcc.cshtml" />
+    <Content Include="Views\Manage\IzmeniPod.cshtml" />
+    <Content Include="Views\UpravnikSale\DodajSalu.cshtml" />
+    <Content Include="Views\UpravnikSale\PrikazTermina.cshtml" />
+    <Content Include="Views\UpravnikSale\DodavanjeTermina.cshtml" />
+    <Content Include="Views\UpravnikSale\DodajEdit.cshtml" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper.js.flow" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\UpravnikSale\PrikazivanjeSala.cshtml" />
+    <Content Include="Views\Shared\_LayoutUS.cshtml" />
+    <Content Include="Views\UpravnikSale\IzmeniSalu.cshtml" />
+    <Content Include="Views\Administrator\SviKorisnici.cshtml" />
+    <Content Include="Views\Administrator\DodajEdit.cshtml" />
+    <Content Include="Views\Administrator\SviUpravnici.cshtml" />
+    <Content Include="Views\Administrator\DodajEditUpravnik.cshtml" />
+    <Content Include="Views\Administrator\Obrisi.cshtml" />
+    <Content Include="Views\Administrator\ObrisiKorisnik.cshtml" />
+    <Content Include="Views\Administrator\SveSale.cshtml" />
+    <Content Include="Views\Administrator\IzmeniSalu.cshtml" />
+    <Content Include="Views\Administrator\ListaSala.cshtml" />
+    <Content Include="Views\Administrator\ListaTermina.cshtml" />
+    <Content Include="Views\Korisnik\DostupneSale.cshtml" />
+    <Content Include="Views\Korisnik\SalaProfile.cshtml" />
+    <Content Include="Views\Korisnik\Termini.cshtml" />
+    <Content Include="Views\Korisnik\TerminInfo.cshtml" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.bootstrap.min.js.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202004121509270_PrvaMigracija.resx">
+      <DependentUpon>202004121509270_PrvaMigracija.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004131134334_V1.resx">
+      <DependentUpon>202004131134334_V1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004141541064_Komentari.resx">
+      <DependentUpon>202004141541064_Komentari.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004141626403_TabelaKomentari.resx">
+      <DependentUpon>202004141626403_TabelaKomentari.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004151027243_PoboljsanjeKomentara.resx">
+      <DependentUpon>202004151027243_PoboljsanjeKomentara.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004151714567_BrojOcena.resx">
+      <DependentUpon>202004151714567_BrojOcena.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004161841194_DodatakModel.resx">
+      <DependentUpon>202004161841194_DodatakModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004171751259_PromenaDateTime.resx">
+      <DependentUpon>202004171751259_PromenaDateTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004181125231_PromenaUpravnikId.resx">
+      <DependentUpon>202004181125231_PromenaUpravnikId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004181155394_Pr.resx">
+      <DependentUpon>202004181155394_Pr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004211654460_IzmenaDa.resx">
+      <DependentUpon>202004211654460_IzmenaDa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004211701217_errormsg.resx">
+      <DependentUpon>202004211701217_errormsg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004251337503_SlikaKorisnik.resx">
+      <DependentUpon>202004251337503_SlikaKorisnik.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006291529070_Dopuna.resx">
+      <DependentUpon>202006291529070_Dopuna.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006291635275_Dopuna1.resx">
+      <DependentUpon>202006291635275_Dopuna1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006291750403_urke.resx">
+      <DependentUpon>202006291750403_urke.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006292032463_IzmeneKorisnikTermin.resx">
+      <DependentUpon>202006292032463_IzmeneKorisnikTermin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007021754524_NovaKlasa.resx">
+      <DependentUpon>202007021754524_NovaKlasa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007021756192_novaIzmena.resx">
+      <DependentUpon>202007021756192_novaIzmena.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007021802175_NoviProp.resx">
+      <DependentUpon>202007021802175_NoviProp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007021817064_NewClasss.resx">
+      <DependentUpon>202007021817064_NewClasss.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>51861</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44391/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

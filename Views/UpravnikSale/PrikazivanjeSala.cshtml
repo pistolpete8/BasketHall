@@ -1,0 +1,175 @@
+﻿@model KosSala.ViewModels.SaleView
+
+@{
+    Layout = "~/Views/Shared/_LayoutUS.cshtml";
+}
+
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>BasketHALL</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~Content/PrikazSala/vvendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="~/Content/PrikazSala/csss/heroic-features.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <!-- Page Content -->
+    <div class="container">
+        @if (@Model.Sale.Count()!=null)
+        {
+            
+            <header class="jumbotron my-4">
+               
+                <h4 class="display-4">  BROJ SALA: @Model.Sale.Count()</h4>
+                <p class="lead">
+                   
+                    Ovo su vaše sale. BasketHall vam omogućava da unesete veliki broj sopstvenih sala sa podacima o lokaciji, vrsti košarke koja se igra u njoj i unos slike koja će biti prikazana svim igračima uz dodatan opis. Neka vaši podaci budu precizni i jasni. Možete dodavati nove ili promeniti informacije o postojećim salama.
+                </p>
+
+                @Html.ActionLink("Dodaj sportsku salu", "DodajSalu", "UpravnikSale", new { @class = "btn btn-primary" })
+            </header>
+        }
+        else
+        {
+            <header class="jumbotron my-4">
+                <h1 class="display-3">Welcome @User.Identity.Name</h1>
+                <p class="lead">
+                    BROJ SALA: Trenutno nemate aktivnih sala
+                    Nemate još unetu salu koju igrači mogu pregledati. BasketHall vam omogućava da unesete veliki broj sopstvenih sala sa podacima o lokaciji, vrsti košarke koja se igra u njoj i unos slike koja će biti prikazana svim igračima uz dodatan opis. Neka vaši podaci budu precizni i jasni. Možete dodavati nove ili promeniti informacije o postojećim salama.
+                </p>
+
+                @Html.ActionLink("Dodaj sportsku salu", "DodajSalu", "UpravnikSale", new { @class = "btn btn-primary" })
+            </header>
+
+        }
+
+
+        <!-- Page Features -->
+    <div class="row text-center">
+
+        @foreach (var item in Model.Sale)
+        {
+
+
+
+
+
+            <div class="col-lg-3 col-md-6 mb-4 ">
+
+                @{
+                    var base64 = Convert.ToBase64String(item.Slika);
+                    var imgsrc = string.Format("data:image/png;base64,{0}", base64);
+                }
+                <div class="card h-100">
+                    <img class="card-img-top" src="@imgsrc" alt="">
+                    <div class="card-body">
+                        <h4 class="card-title"> @item.Naziv </h4>
+
+                    </div>
+                    <div class="card-footer">
+
+                        @Html.ActionLink("Izmeni", "IzmeniSalu", new { id = @item.Id }, new { @class = "btn btn-primary" })
+                        <button data-id="@item.Id" data-toggle="modal" data-target="#ObrisiSalu" class="open-ObrisiSalu btn btn-primary">Obriši</button>
+                    </div>
+                </div>
+            </div>
+                    }
+
+    <div class="modal fade" id="ObrisiSalu" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Da li ste sigurni da zelite da obrišete salu?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <form class="forma">
+                        <input type="hidden" name="salaId" id="salaId" value="" />
+                        @Html.ActionLink("Potvrdi", "ObrisiSalu", new { id = "tmp" }, new { @class = "link btn btn-secondary pull-left" })
+                        <button type="button" class="btn btn-secondary pull-right" data-dismiss="modal">Zatvori</button>
+
+                    </form>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+                        <!-- /.row -->
+                        <!-- /.container -->
+                        <!-- Footer -->
+                        <!-- Bootstrap core JavaScript -->
+
+                        @section Scripts
+{
+                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+                            <script src="~/Content/NovaTema/bootstrapNOVATEMA.bundle.min.js"></script>
+
+                            <script src="~Content/PrikazSala/vvendor/jquery/jquery.min.js"></script>
+                            <script src="~Content/PrikazSala/vvendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                            <!-- funkcija za modal-->
+                            <script>
+
+
+
+                                $(function () {
+                                    $(".open-ObrisiSalu").click(function () {
+                                        $('#salaId').val($(this).data('id'));
+                                        var id = $(this).data('id');
+
+                                        $(function () {
+                                            $('.link').click(function () {
+
+                                                this.href = this.href.replace("tmp", id);
+                                            });
+                                        });
+
+                                    });
+                                });
+
+
+
+
+
+                            </script>
+                        }
+
+</body>
+<style>
+    .card-img-top {
+    position: relative;
+    height: 200px;
+    width: 200px;
+    margin: 30px auto;
+  
+    overflow: hidden;
+    box-shadow: 1px 1px 15px -5px black;
+    transition: all 0.3s ease;
+}
+  a
+  {
+      color:white;
+  }
+</style>
+
+</html>

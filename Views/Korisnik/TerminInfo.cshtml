@@ -1,0 +1,447 @@
+﻿@model KosSala.ViewModels.SaleView
+@{
+    ViewBag.Title = "TerminInfo";
+    Layout = "~/Views/Shared/_LayoutKorisnik.cshtml";
+}
+
+
+<body>
+    <div class="container">
+        <div class="card border-0 shadow my-5">
+            <div class="card-body p-5">
+               
+                   
+                    
+                <div class="row">
+
+
+                    @{var base66 = Convert.ToBase64String(Model.Sala.Slika);
+                        var imgsrc2 = string.Format("data:image/png;base64,{0}", base66);
+
+
+                    }
+
+                    
+                    <section class="pt-5 pb-5">
+                        <div class="container">
+                            <div class="row justify-content-between">
+                                <div class="col col-md-12 pr-md-5 pl-md-5">
+                                    <div class="bd-example bd-example-tabs">
+                                        
+                                        <ul class="nav nav-pills flex-column justify-content-center flex-sm-row mb-3" id="pills-tab" role="tablist">
+                                           
+                                            <li class="nav-item  border border-light  rounded text-sm-center  nav-item mr-md-1">
+                                                <a class="nav-link " data-toggle="pill" href="#pills-contact"><i class="fa fa-user fa-lg " aria-hidden="true"></i> Upravnik</a>
+                                            </li>
+                                            <li class="nav-item  border border-light  rounded text-sm-center  nav-item mr-md-1">
+                                                <a class="nav-link active" data-toggle="pill" href="#pills-info"><i class="fa fa-code fa-lg " aria-hidden="true"></i> Info</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content pt-5 pb-5" id="pills-tabContent">
+                                            <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+
+                                            </div>
+                                            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+
+                                            </div>
+                                            @{var base68 = Convert.ToBase64String(Model.UpravnikSale.SlikaKorisnika);
+                                                var imgsrc4 = string.Format("data:image/png;base64,{0}", base68);
+
+
+                                            }
+                                            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                                                <div class="container-fluid">
+                                                    <div class="row align-items-center justify-content-between">
+                                                        <div class="col-12 col-md-5  text-left">
+                                                            <h2>
+                                                                @Model.UpravnikSale.Ime @Model.UpravnikSale.Prezime
+                                                            </h2>
+                                                            <p class=" mt-4">
+                                                                <ul>
+                                                                    <li><b>USERNAME:</b> @Model.UpravnikSale.UserName</li>
+                                                                    <li><b>EMAIL:</b> @Model.UpravnikSale.Email</li>
+                                                                    <li>
+                                                                        <b>TELEFON:</b> @{if (@Model.UpravnikSale.PhoneNumber == null)
+                                                                            {<label class="text-danger"> nema podataka o telefonu</label>}
+                                                                            else
+                                                                            { @Model.UpravnikSale.PhoneNumber}
+                                                                        }
+                                                                    </li>
+                                                                    <li>
+                                                                        @{if (@Model.UpravnikSale.Opis == null)
+                                                                            {<label class="text-danger">nema podataka o opisu</label>}
+                                                                            else
+                                                                            { @Model.UpravnikSale.PhoneNumber} }
+                                                                </li>
+                                                            </ul>
+                                                        </p>
+                                                        <blockquote class="card  text-left  py-3 px-4 mb-3 mt-4  ">
+                                                            <div class="row align-items-center justify-content-between">
+                                                                <div class="col-3  p-md-1 text-center rounded">
+                                                                    <img src="@imgsrc4" class="img-fluid py-0 rounded" alt="features">
+                                                                    <footer class="blockquote-footer small p-1"><span class="small">@Model.UpravnikSale.Ime <cite class="font-weight-bold">UPRAVNIK</cite></span></footer>
+                                                                </div>
+                                                                <div class="col-9">
+
+                                                                    <p class=" m-0 text-muted small">
+                                                                        @Model.Sala.Opis;
+                                                                    </p>
+                                                                    <i class="fa fa-quote-right fa-2x text-muted pull-right mt-3" aria-hidden="true"></i>
+                                                                </div>
+                                                            </div>
+                                                        </blockquote>
+                                                        @Html.ActionLink("Profil upravnika", "Profile", new { id = Model.UpravnikSale.Id }, new { @class = "btn btn-primary" })
+                                                    </div>
+                                                    <div class="col-12 col-md-5 mb-4 ml-md-auto">
+
+                                                        <img alt="image" class="img-fluid img-center mr-auto ml-auto d-none d-md-block" src="@imgsrc4">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade active show" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab">
+                                            <div class="container-fluid">
+                                                <div class="row align-items-center justify-content-between">
+                                                    <div class="col-12 col-md-5  text-left">
+                                                        <h2>@Model.Sala.Naziv </h2>
+                                                        <p class=" mt-4">
+                                                            <ul>
+                                                                <li><b>Lokacija:</b>  @Model.Sala.Lokacija</li>
+                                                                <li><b>Vrsta basketa:</b>  @Model.Termin.VrstaBasketa</li>
+                                                                <li><b>Broj trenutno prijavljenih:</b>  @Model.Termin.BrojPrijavljenih</li>
+                                                                <li><b>Rejting:</b>  @Model.Sala.Rejting.ToString("f2")</li>
+                                                            </ul>
+                                                        </p>
+                                                        <blockquote class="card  text-left  py-3 px-4 mb-3 mt-4  ">
+                                                            <div class="row align-items-center justify-content-between">
+                                                                <div class="col-3  p-md-1 text-center rounded">
+                                                                    @{var base67 = Convert.ToBase64String(Model.UpravnikSale.SlikaKorisnika);
+                                                                        var imgsrc3 = string.Format("data:image/png;base64,{0}", base67);
+
+
+                                                                    }
+                                                                    <img src="@imgsrc3" class="img-fluid py-0 rounded" alt="features">
+                                                                    <footer class="blockquote-footer small p-1"><span class="small">@Model.UpravnikSale.Ime  <cite class="font-weight-bold">UPRAVNIK</cite></span></footer>
+                                                                </div>
+                                                                <div class="col-9 position-relative">
+
+                                                                    <p class=" m-0 text-muted small">
+                                                                        @Model.Sala.Opis;
+                                                                    </p>
+                                                                    <i class="fa fa-quote-right fa-2x text-muted pull-right mt-3" aria-hidden="true"></i>
+                                                                </div>
+
+                                                            </div>
+                                                        </blockquote>
+                                                        @Html.ActionLink("Profil sale", "SalaProfile", new { id = Model.Sala.Id }, new { @class = "btn btn-primary" })
+                                                    </div>
+                                                    <div class="col-12 col-md-5 mb-4 ml-md-auto">
+                                                        <img alt="image" class="img-fluid img-center mr-auto ml-auto d-none d-md-block stretc" src="@imgsrc2">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+
+
+
+                    
+
+                </div>
+
+
+
+
+                <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+                    <h1 class="section-heading mb-4">
+                        @Model.Termin.PocetakTermina.Day.@{ int caseSwitch = Model.Termin.PocetakTermina.Month; switch (caseSwitch)
+                                            {
+                                                case 1: <label>JAN</label> break;
+                                                case 2: <label>FEB</label> break;
+                                                case 3: <label>MAR</label> break;
+                                                case 4: <label>APR</label> break;
+                                                case 5: <label>MAJ</label> break;
+                                                case 6: <label>JUN</label> break;
+                                                case 7: <label>JUL</label> break;
+                                                case 8: <label>AVG</label> break;
+                                                case 9: <label>SEP</label> break;
+                                                case 10: <label>OKT</label> break;
+                                                case 11: <label>NOV</label> break;
+                                                case 12: <label>DEC</label> break;
+                                            } }
+                    </h1>
+                        <h2 class="section-heading mb-4">
+                            <span class="section-heading-upper">
+
+                                <span class="section-heading-lower">  @Model.Termin.PocetakTermina.ToShortTimeString()  <i class="fa fa-long-arrow-right" aria-hidden="true"></i> </span>
+
+                            </span>
+                            <span class="section-heading-lower"> @Model.Termin.KrajTermina.ToShortTimeString():</span>
+                        </h2>
+                        <p class="mb-3">
+
+                            Pridruzivanjem na termin garantujete svoj dolazak u definisanom vremenu i definisanoj sali. U suprotnom Administrator ima pravo da vam dodeli zabranu koriscenja aplikacije permamentno ili na odredjeni period.
+                        </p>
+                        <div class="intro-button mx-auto">
+                            @{
+                                if (Model.Termin.KrajTermina < DateTime.Now)
+                                {
+                                    <h5 class="text-danger"> TERMIN JE ZAVRŠEN </h5>
+                                }
+                                else if (Model.Termin.PocetakTermina <= DateTime.Now && Model.Termin.KrajTermina >= DateTime.Now)
+                                {
+                                    <h5 class="text-danger"> TERMIN JE U TOKU </h5>
+                                }
+
+                                else
+                                {
+
+
+                                    if (@TempData.ContainsKey("nepridruzen"))
+                                    {
+                                        if (Model.Termin.Slobodan == true)
+                                        {
+
+                                            @Html.ActionLink("PRIDRUŽI SE TERMINU", "PridruziSeTerminu", new { id = Model.Termin.Id }, new { @class = "btn btn-primary btn-xl" })
+                                            TempData.Remove("nepridruzen");
+                                        }
+                                        else
+                                        {
+                                            <div>
+
+                                                <button type="button" id="btnOceni " class="btn btn-primary " data-toggle="modal" data-target="#Oceni" disabled> PRIDRUŽI SE TERMINU</button> <label class="text-danger">Termin je pun!</label><!--dugme koje okida modal-->
+
+                                            </div>
+                                        }
+
+
+                                    }
+                                    else
+                                    {
+                                        if (Model.Termin.Slobodan == false)
+                                        {
+                                            <div>
+
+                                                <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#Oceni" disabled> PRIDRUŽI SE TERMINU</button> <label class="text-danger">Termin je pun i već ste pridruženi!</label><!--dugme koje okida modal-->
+                                                @Html.ActionLink("ODUSTANI", "Odustani", new { id = Model.Termin.Id }, new { @class = "btn btn-primary btn-xl" })
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div>
+
+                                                <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#Oceni" disabled> PRIDRUŽI SE TERMINU</button> <label class="text-danger">Već ste se pridružili</label><!--dugme koje okida modal-->
+                                                @Html.ActionLink("ODUSTANI", "Odustani", new { id = Model.Termin.Id }, new { @class = "btn btn-primary btn-xl" })
+                                            </div>
+                                        }
+
+                                    }
+                                }
+                            }
+
+
+                        </div>
+                </div>
+                    <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+                        <h2 class="section-heading mb-4">
+                            <span class="section-heading-upper">Prijavljeni igrači</span>
+                            <hr />
+
+                        </h2>
+                    </div>
+                    <div class="container">
+                        <div class="row mt-4">
+
+
+
+
+                            @if(Model.Players.Count()==0)
+                            {
+                                <h4 class="text-danger">Još nema prijavljenih igrača</h4>
+                            }
+                            @foreach (var igrac in Model.Players)
+                            {
+
+                                <div class="col-12 col-sm-6 col-md-3">
+                                    <div class="flip-div">
+                                        <div class="flip-main">
+                                            <div class="front">
+                                                <div class="card">
+                                                    <div class="card-body text-center pb-2">
+                                                        @{var base64 = Convert.ToBase64String(igrac.SlikaKorisnika);
+                                                            var imgsrc = string.Format("data:image/png;base64,{0}", base64);
+
+
+                                                        }
+
+                                                        <p><img class="rounded-circle slika" src="@imgsrc"></p>
+                                                        <h5 class="card-title"><strong> @igrac.Ime @igrac.Prezime</strong></h5>
+                                                        <h6 class="card-title" style="color:#FF6B00"><strong>@igrac.UserName</strong></h6>
+
+                                                        <p class="card-text">Rejting: @igrac.Rejting.ToString("f2")</p>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="back rounded">
+                                                <div class="card">
+                                                    <div class="card-body text-center">
+
+                                                        <h4 class="card-title"><strong>@igrac.Ime @igrac.Prezime</strong></h4>
+
+                                                        <p class="card-text">
+                                                            @{
+                                                                if (igrac.Opis == null)
+                                                                { <label>Korisnik nema opis</label>}
+                                                                else
+                                                                { @igrac.Opis }
+                                                            }
+
+                                                        </p>
+                                                        <ul class="list-inline">
+
+                                                            <li class="list-inline-item">
+
+                                                                @{ if (Model.LoggedUserId != igrac.Id)
+                                                                    {
+                                                                    @Html.ActionLink("Profil", "Profile", new { id = @igrac.Id }, new { @class = "btn btn-primary" })
+                                                                        }
+                                                                    }
+
+                                                            </li>
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+
+
+
+
+
+
+
+
+                        </div>
+                        <div class="row mt-1">
+
+
+
+                        </div>
+                    </div>
+                
+                </div>
+
+        </div>
+</body>
+
+<style>
+   
+
+    .card-body .slika {
+        height: 110px !important;
+    }
+
+    .flip-div {
+        cursor: pointer;
+    }
+
+        .flip-div:hover .back, .flip-div.hover .back {
+            -webkit-transform: rotateY(0deg);
+            -moz-transform: rotateY(0deg);
+            -o-transform: rotateY(0deg);
+            -ms-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+        }
+
+        .flip-div:hover .front, .flip-div.hover .front {
+            -webkit-transform: rotateY(180deg);
+            -moz-transform: rotateY(180deg);
+            -o-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+        }
+
+    .flip-main {
+        -webkit-transition: 1s;
+        -webkit-transform-style: preserve-3d;
+        -ms-transition: 1s;
+        -moz-transition: 1s;
+        -moz-transform: perspective(1000px);
+        -moz-transform-style: preserve-3d;
+        -ms-transform-style: preserve-3d;
+        transition: 1s;
+        transform-style: preserve-3d;
+        position: relative;
+    }
+
+    .front {
+        position: relative;
+        -webkit-transform: rotateY(0deg);
+        -ms-transform: rotateY(0deg);
+        z-index: 2;
+        margin-bottom: 30px;
+    }
+
+    .back {
+        position: absolute;
+        top: 0;
+        left: 0;
+        -webkit-transform: rotateY(-180deg);
+        -moz-transform: rotateY(-180deg);
+        -o-transform: rotateY(-180deg);
+        -ms-transform: rotateY(-180deg);
+        transform: rotateY(-180deg);
+        -webkit-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+        -moz-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+        box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+    }
+
+        .back ul li a {
+            font-size: 18px;
+        }
+
+    .front, .back {
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden;
+        -ms-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-transition: 1s;
+        -webkit-transform-style: preserve-3d;
+        -moz-transition: 1s;
+        -moz-transform-style: preserve-3d;
+        -o-transition: 1s;
+        -o-transform-style: preserve-3d;
+        -ms-transition: 1s;
+        -ms-transform-style: preserve-3d;
+        transition: 1s;
+        transform-style: preserve-3d;
+    }
+    .play
+	{
+		color:#5199FF 
+	}
+	.aktivan
+	{
+		color: #8CBA51;
+	}
+	.end
+	{
+		color:#F6522E;
+	}
+      
+</style>
+

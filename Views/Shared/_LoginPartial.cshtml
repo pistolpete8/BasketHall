@@ -1,0 +1,61 @@
+﻿
+@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item">
+
+               
+                @Html.ActionLink(" Profil", "ProfileAcc", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = " nav item btn fa fa-user " })
+            </li>
+            <li class="nav-item"><a class="btn fa fa-sign-out-alt" href="javascript:document.getElementById('logoutForm').submit()">Odjavi se</a></li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="navbar-nav ml-auto ">
+        <li class="nav-link">@Html.ActionLink("Registruj se", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li class="nav-link">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .btn {
+        background-color: #FF6B00;
+        border: none;
+        color: white;
+        padding: 9px 10px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-left: 7px;
+    }
+    .btnDialog {
+        background-color: white;
+        border: none;
+        color: black;
+        padding: 9px 10px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-left: 7px;
+    }
+
+    .avatar {
+        vertical-align: middle;
+        width: 40px;
+        height: 50px;
+        border-radius: 50%;
+    }
+
+    /* Darker background on mouse-over */
+    .btn:hover {
+        background-color: #b34a00;
+        color: black;
+    }
+</style>

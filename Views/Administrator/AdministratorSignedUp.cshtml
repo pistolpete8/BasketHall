@@ -1,0 +1,124 @@
+﻿@model KosSala.ViewModels.AdminStatistic
+
+@{
+    ViewBag.Title = "AdministratorSignedUp";
+    Layout = "~/Views/Shared/_LayoutAdministrator.cshtml";
+}
+
+
+
+
+
+
+
+@Html.ActionLink("Prikaz svih korisnika", "SviKorisnici")
+    <body>
+        @{
+            ViewBag.Title = "KorisnikSignedUp";
+        }
+
+        <div class="container">
+            <div class="card border-0 shadow my-5">
+                <div class="card-body p-5">
+
+
+
+                    <div class="container">
+
+                        <!-- Page Heading -->
+                        <h1 class="my-4">
+                            DOBRODOŠAO
+                            <small>@User.Identity.Name</small>
+                        </h1>
+                        <hr style="border: 1px solid black">
+                        <!-- Project One -->
+                        <div class="row">
+                            <div class="col-md-7">
+                                <a href="#">
+                                    <img class="img-fluid rounded mb-3 mb-md-0" src="~/Content/AdminPage/player1.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="col-md-5">
+                                <h3>IGRAČI</h3>
+                                <hr />
+                                <h3>Broj registrovanih igrača:  @Model.Korinsnici.Count()</h3>
+                                <p>Vidi sve prijavljene igrače. Izmeni im podatke, sliku ili obriši neaktivne korisnike.</p>
+                                @Html.ActionLink("Vidi sve igrače", "SviKorisnici", "Administrator", new { @class = "btn btn-primary" })
+                            </div>
+                        </div>
+                        <!-- /.row -->
+
+                        <hr style="border: 1px solid black">
+
+                        <!-- Project Two -->
+                        <div class="row">
+                            <div class="col-md-7">
+                                <a href="#">
+                                    <img class="img-fluid rounded mb-3 mb-md-0" src="~/Content/AdminPage/upravnik1.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="col-md-5">
+                                <h3>UPRAVNICI SALA</h3>
+                                <hr />
+                                <h3>Broj upravnika:  @Model.Upravnici.Count()</h3>
+                                <p>Vidi sve prijavljene upravnike sala. Izmeni im podatke, sliku ili obriši neaktivne upravnike.</p>
+                                @Html.ActionLink("Vidi listu upravnika", "SviUpravnici", "Administrator", new { @class = "btn btn-primary" })
+                            </div>
+                        </div>
+                        <!-- /.row -->
+
+                        <hr style="border: 1px solid black">
+
+                        <!-- Project Three -->
+                        <div class="row">
+                            <div class="col-md-7">
+                                <a href="#">
+                                    <img class="img-fluid rounded mb-3 mb-md-0" src="~/Content/AdminPage/sala1.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="col-md-5">
+                                <h3>SALE</h3>
+                                <hr />
+                                <h3>Broj sala:  @Model.Sale.Count()</h3>
+                                <p> Vidi sve registrovane sale na sajtu. Svaka sala poseduje opis, lokaciju i sliku. Izmeni im podatke(neprikladn ili netačne), sliku ili obriši neaktivne sale.</p>
+                                @Html.ActionLink("Vidi sve sale", "SveSale", "Administrator", new { @class = "btn btn-primary" })
+                            </div>
+                        </div>
+                        <!-- /.row -->
+
+                        <hr style="border: 1px solid black">
+
+                        <div class="row">
+                            <div class="col-md-7">
+                                <a href="#">
+                                    <img class="img-fluid rounded mb-3 mb-md-0" src="~/Content/AdminPage/termin1.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="col-md-5">
+                                <h3>TERMINI</h3>
+                                <hr />
+                                <h3>Broj termina:  @Model.Termini.Count()</h3>
+                                <p>Vidi sve postavljene termine od strane upravnika sale</p>
+                                @Html.ActionLink("Vidi sve termine", "ListaTermina", "Administrator", new { @class = "btn btn-primary" })
+                            </div>
+                        </div>
+                        <!-- /.row -->
+
+                        <hr style="border: 1px solid black">
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </body>
+<footer>
+</footer>
+@section Scripts
+{
+    
+
+}

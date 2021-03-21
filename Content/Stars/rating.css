@@ -1,0 +1,47 @@
+﻿body {
+    .ratingStars
+
+{
+    float: left;
+    border: none;
+}
+
+.ratingStars:not(:checked) > input {
+    position: absolute;
+    top: -9999px;
+    clip: rect(0, 0, 0, 0);
+}
+
+.ratingStars:not(:checked) > label {
+    float: right;
+    width: 1em;
+    padding: 0 .1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 500%;
+    line-height: 1.6;
+    color: #ddd;
+}
+
+    .ratingStars:not(:checked) > label:before {
+        content: '★ ';
+        font-size: 60px
+    }
+
+.ratingStars > input:checked ~ label {
+    color: #f70;
+}
+
+.ratingStars:not(:checked) > label:hover, .ratingStars:not(:checked) > label:hover ~ label {
+    color: gold;
+}
+
+.ratingStars > input:checked + label:hover, .rating > input:checked + label:hover ~ label, .rating > input:checked ~ label:hover, .rating > input:checked ~ label:hover ~ label, .ratingStars > label:hover ~ input:checked ~ label {
+    color: #ea0;
+}
+
+.ratingStars > label:active {
+    position: relative;
+}
+

@@ -1,0 +1,570 @@
+﻿@model KosSala.ViewModels.KorisnikSl
+@{
+    ViewBag.Title = "KorisnikSignedUp";
+    Layout = "~/Views/Shared/_LayoutKorisnik.cshtml";
+}
+
+<h2>BASKETHALL  </h2>
+<head>
+
+    <!-- za slike koje se pomeraju-->
+    <link href="~/Content/Login/loginNotiffication.css" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <script src="http://code.jquery.com/jquery.js"></script>
+  <script type="text/javascript"     src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+  
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>*@
+   
+    
+    
+
+</head>
+<body>
+    <div class="container">
+        <div class="card border-0 shadow my-5">
+            <div class="card-body p-5">
+
+
+                
+
+
+
+
+                <div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
+                    <!--Indicators-->
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-example-2" data-slide-to="1"></li>
+                        <li data-target="#carousel-example-2" data-slide-to="2"></li>
+                    </ol>
+                    <!--/.Indicators-->
+                    <!--Slides-->
+                    <div class="carousel-inner" role="listbox">
+                        <div class="carousel-item active">
+                            <div class="view">
+                                <img class="d-block w-100" src="~/Content/carousel/players.jpg"
+                                     alt="First slide">
+                                <div class="mask rgba-black-light"></div>
+                            </div>
+                            <div class="carousel-caption">
+
+                                @Html.ActionLink("IGRAČI", "Index", "Korisnik", new { @class = "btn btn-primary h3-responsive " })
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <!--Mask color-->
+                            <div class="view">
+                                <img class="d-block w-100" src="~/Content/carousel/termin.jpg"
+                                     alt="Second slide">
+                                <div class="mask rgba-black-strong"></div>
+                            </div>
+                            <div class="carousel-caption">
+
+                                @Html.ActionLink("TERMINI", "Termini", "Korisnik", new { @class = "btn btn-primary h3-responsive" })
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <!--Mask color-->
+                            <div class="view">
+                                <img class="d-block w-100" src="~/Content/carousel/sale.jpg"
+                                     alt="Third slide">
+                                <div class="mask rgba-black-slight"></div>
+                            </div>
+                            <div class="carousel-caption">
+
+                                @Html.ActionLink("SALE", "DostupneSale", "Korisnik", new { @class = "btn btn-primary h3-responsive" })
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.Slides-->
+                    <!--Controls-->
+                    <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                    <!--/.Controls-->
+                </div>
+
+
+
+
+
+
+
+
+
+              
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3 style="padding-top:30px;">Statistika proseka</h3>
+                                        <hr>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-12 rating-part-left text-center">
+                                       
+                                        <h1>
+                                            @Model.prosecanRejting
+                                        </h1>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <p>Prosečan rejting</p>
+                                    </div>
+                                    <div class="col-md-8 col-sm-8 col-xs-12">
+
+                                        <div class="progress-bar-section">
+                                            @{ 
+                                                int broj = Model.brojeviPoOcenama[1];
+                                                int ukupno = Model.brojeviPoOcenama[0];
+                                                int procenat = (broj * 100) / ukupno;
+                                            }
+                                            <p>@procenat%</p>
+                                            <div class="progress progress-bar-vertical">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="height: @procenat%;"></div>
+                                            </div>
+                                            <i class="fa fa-star" aria-hidden="true"></i><br>
+                                            <span>5</span>
+                                        </div>
+
+                                        <div class="progress-bar-section">
+                                            @{
+                                                 broj = Model.brojeviPoOcenama[2];
+                                                 ukupno = Model.brojeviPoOcenama[0];
+                                                 procenat = (broj * 100) / ukupno;
+                                            }
+                                            <p>@procenat%</p>
+                                            <div class="progress progress-bar-vertical">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="height: @procenat%;"></div>
+                                            </div>
+                                            <i class="fa fa-star" aria-hidden="true"></i><br>
+                                            <span>4</span>
+                                        </div>
+
+                                        <div class="progress-bar-section">
+                                            @{
+                                                broj = Model.brojeviPoOcenama[3];
+                                                ukupno = Model.brojeviPoOcenama[0];
+                                                procenat = (broj * 100) / ukupno;
+                                            }
+                                            <p>@procenat%</p>
+                                            <div class="progress progress-bar-vertical">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="height: @procenat%;"></div>
+                                            </div>
+                                            <i class="fa fa-star" aria-hidden="true"></i><br>
+                                            <span>3</span>
+                                        </div>
+
+                                        <div class="progress-bar-section">
+                                            @{
+                                                broj = Model.brojeviPoOcenama[4];
+                                                ukupno = Model.brojeviPoOcenama[0];
+                                                procenat = (broj * 100) / ukupno;
+                                            }
+                                            <p>@procenat%</p>
+                                            <div class="progress progress-bar-vertical">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="height: @procenat%;"></div>
+                                            </div>
+                                            <i class="fa fa-star" aria-hidden="true"></i><br>
+                                            <span>2</span>
+                                        </div>
+
+                                        <div class="progress-bar-section">
+                                            @{
+                                                broj = Model.brojeviPoOcenama[5];
+                                                ukupno = Model.brojeviPoOcenama[0];
+                                                procenat = (broj * 100) / ukupno;
+                                            }
+                                            <p>@procenat%</p>
+                                            <div class="progress progress-bar-vertical">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="height: @procenat%;"></div>
+                                            </div>
+                                            <i class="fa fa-star" aria-hidden="true"></i><br>
+                                            <span>1</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <hr>
+                                    <h3>TOP 5 IGRAČA</h3>
+                                    <hr>
+                                </div>
+                                @{
+                                    foreach (var player in Model.Igraci)
+                                    {
+                                        <div class="row review-section">
+                                            <div class="col-md-4 col-md-4 col-xs-4 review-part-left">
+                                                <div class="row">
+                                               <div class="col-md-4 col-sm-4 col-xs-12">
+
+                                                  @{
+                                                   var base65 = Convert.ToBase64String(player.SlikaKorisnika);
+                                                   var imgsrc2 = string.Format("data:image/png;base64,{0}", base65);
+                                                  }
+                                                  <img src="@imgsrc2">
+                                               </div>
+                                                    <div class="col-md-8 col-sm-8 col-xs-12">
+                                                        <p>@player.Ime</p>
+                                                        <span>@player.UserName</span><br>
+                                                        <small>@player.Rejting</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8 col-sm-8 col-xs-8 review-part-right">
+                                                <div class="row">
+                                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                                        @{ int caseSwitch = (int)player.Rejting; switch (caseSwitch)
+                                                            {
+                                                                case 1: <i class="fa fa-star" aria-hidden="true"></i> break;
+                                                                case 2: <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i> break;
+                                                                case 3: <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i> break;
+                                                                case 4: <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i> break;
+                                                                case 5: <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i> break;
+                                                               
+                                                            } }
+                                                       
+                                                    </div>
+                                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                                        <p>
+                                                            @player.Opis
+                                                            
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+
+                                }
+                               
+                                </div>
+                   
+            
+           
+            </div>
+        </div>
+    </div>
+    <!-- Modal za login -->
+    <div id="loginModal" class="modal fade">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    @{
+                        var base64 = Convert.ToBase64String(Model.Slika);
+                        var imgsrc = string.Format("data:image/png;base64,{0}", base64);
+                    }
+                    <img src="@imgsrc" alt="" class="avatar3 icon-box ">
+
+
+
+                </div>
+                <div class="modal-body">
+                    <h4 class="modal-title align-baseline " style="padding-bottom:20px;">Uspešan Login!</h4>
+                    <p class="text-center">Dobrodošao ponovo @User.Identity.Name.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success btn-block" data-dismiss="modal">Nastavi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal za Register-->
+    <div id="registerModal" class="modal fade">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="icon-box2">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                    </div>
+
+                </div>
+
+                <div class="modal-body">
+                    <h4 class="modal-title" style="padding-bottom:20px;">Uspešna Registracija!</h4>
+                    <p class="text-center">Uspešno ste ostvarili članstvo BasketHall aplikacije.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success btn-block" data-toggle="modal" data-target="#pravilnikModal" data-dismiss="modal">Pravilnik</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Pravilnik-->
+
+    <div class="modal fade" id="pravilnikModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header modal-headerRules">
+                    <h2 class="modal-title" id="exampleModalLongTitle" style="text-align:center; ">Pravila</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body row">
+                    <div class="scrollingDiv">
+                        <hr />
+                        <label> Članstvo na aplikaciji je slobodno i besplatno.</label>
+                        <label> Poruke na forumu predstavljaju stavove i mišljenja autora. Savez ne odgovara za sadržaj poruka, niti za stavove iznesene u njima. </label>
+                        <label> Pisanje poruka, odnosno aktivno učestvovanje na forumu, omogućeno je samo registrovanim članovima (korisnicima).</label>
+                        <label> Prijavljivanjem i učestvovanjem na forumu prihvatate da postoje izvesni rizici za koje administratori foruma ne snose odgovornost. </label>
+                        <label> Mogućnost neispravnosti u radu foruma.</label>
+                        <label> Mogućnost nestanka informacija, ocena ili vaših komentara. </label>
+                        <label> Mogućnost otkrivanja vaših ličnih podataka.</label>
+
+                        <hr />
+                        <h4 style="text-align:center; "> Kreiranje profila</h4>
+                        <hr />
+
+                        <label> Korisničko ime (nick), može biti lični pozivni znak, a u posebnim situacijama prezime i ime ili pseudonim uz obavezno predstavljanje prezimenom i imenom člana. </label>
+                        <label> Korisničko ime koje je provokativno, uvredljivo po druge korisnike BasketHall aplikacije, ili se na bilo koji način kosi sa nekom tačkom ovog pravilnika, biće suspendovano, promenjeno od strane administratora foruma. </label>
+                        <label> Zabranjeno je koristiti provokativne slike</label>
+                        <label> Administrator BasketHall aplikacije ima puno pravo na brisanja korisnika ukoliko se korisnik ne drzi pravilnika.</label>
+
+                        <hr />
+                        <h4 style="text-align:center;">Prava korisnika</h4>
+                        <hr />
+
+                        <label>Svaki korisnik ima pravo da se pridruzi slobodnim terminima .</label>
+                        <label>Svaki korisnik ima pravo da slobodno iznese svoje mišljenje o nekom pitanju ukoliko se ne kosi sa ovim pravilnikom.</label>
+                        <label>Svaki korisnik ima pravo na pomoć administratora.</label>
+                        <label>Prilikom komentarisanja sala i ostalih korisnika, korisnici su dužni da poštuju ovaj pravilnik.</label>
+                        <label>Ukoliko korisnik ne može da reši problem bilo koje vrste vezan za aplikaciju, može se obratiti za pomoć administratoru aplikacije putem zvanickog Baskethal Email-a ili telefona.</label>
+
+                        <hr />
+                        <h4 style="text-align:center; color:red;"> Zabranjeno je: </h4>
+                        <hr />
+
+                        <label> Napadati ili vređati korisnike aplikacije po nacionalnom, verskom, geografskom, rasnom ili nekom drugom osnovu. </label>
+                        <label>Isticati nacionalnu, versku, geografsku ili rasnu pripadnost, materijalno stanje i slično, kako svoje tako i drugih korisnika.</label>
+                        <label> Postavljati poruke kojima kršite nečija zakonska, patentna, autorska ili druga prava.</label>
+                        <label>Davati svoje korisničko ime i šifru na korišćenje nekom drugom. Zabranjeno je otvarati više korisničkih naloga. </label>
+                        <label> Koristiti vulgarno izražavanje.</label>
+                        <label>Korišćenje više naloga na forumu se smatra zloupotrebom.</label>
+                        <label>Zabranjeno je ulaziti u diskusije sa administratorima i upravnicima sala o gore postavljenim tačkama.</label>
+                        <label>Upravnici sala imaju ekskluzivno pravo da uredjuju svoje sale prema sopstvenom nahodjenju i slobodnoj proceni i nisu dužni da daju objašnjenja niti pravdaju svoje akcije i postupke, a za svoj rad odgovaraju IO SRS.</label>
+
+                        <hr />
+                        <h4 style="text-align:center; color:red;">Sankcije </h4>
+                        <hr />
+
+                        <label>Ukoliko se neki korisnik ponaša u suprotnosti sa ovim pravilnikom i greške ponavlja i posle upozorenja da to ne čini, biće mu zabranjen pristup aplikaciji.</label>
+                        <label>Zabrana pristupa aplikaciji je krajnja mera, kada više ništa ne može da pomogne. Administratori zadržavaju pravo da primene ovu meru odmah ukoliko se neki korisnik ponaša krajnje nedolično.</label>
+
+                        <hr />
+                        <h4 style="text-align:center; color:red;">  Administratori foruma zadržavaju pravo i slobodu odlučivanja da: </h4>
+                        <hr />
+
+                        <label>Izvrše ispravke, adaptacije ili bilo koje druge promene na aplikaciji.</label>
+                        <label>Izvrše reorganizaciju informacija na sistemu.</label>
+                        <label>Uklone zastarele komentare.</label>
+                        <label> Promene ili ograniče funkcionisanje foruma ili bilo kog njegovog dela.</label>
+                        <label>Da promene ovaj pravilnik bilo kada i iz bilo kog razloga.</label>
+                        <label> Da odstupe od ovog pravilnika ukoliko to trenutna situacija zahteva. </label>
+                        <hr />
+                        <label class="text-secondary"> Pravilnik sastavljen od strane UperTeam-a.</label>
+
+                    </div>
+
+
+
+
+
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <div>
+                        <asp:CheckBox ID="checkbox1" runat="server" Text="I Agree" Checked="false" />
+                        <input id="checkbox1" type="checkbox" name="CheckBox1" runat="server" /><label for="CheckBox2">Slazem se</label>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+
+                            <button runat="server" id="btnSlazemSe" OnClick="SlazemSe_Click" Text="Nastavi" enabled="false" class="btn " data-dismiss="modal">Nastavi </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</body>
+@{
+   
+    if (TempData.ContainsKey("login"))
+    {
+        <script type="text/javascript">
+            $(window).on('load', function () {
+                $('#loginModal').modal('show');
+            });
+
+
+        </script>
+
+
+
+
+        TempData.Remove("login");
+    }
+    if (TempData.ContainsKey("register"))
+    {
+        <script type="text/javascript">
+            $(window).on('load', function () {
+                $('#registerModal').modal('show');
+            });
+        </script>
+        TempData.Remove("register");
+    }
+    <script>
+
+        $(function () {
+            var $btn = $(":submit[id$=btnSlazemSe]");
+            var $chk = $(":input:CheckBox[id$=checkbox1]");
+            // check on page load
+            checkChecked($chk);
+            $chk.click(function () {
+                checkChecked($chk);
+            });
+            function checkChecked(chkBox) {
+                if ($chk.is(':checked')) {
+                    $btn.removeAttr('disabled');
+                }
+                else {
+                    $btn.attr('disabled', 'disabled')
+                }
+
+
+            }
+        });
+    </script>
+}
+
+<style>
+    div.scrollingDiv {
+        max-height: 650px;
+        width: 100%;
+        FLOAT: left;
+        overflow-y: scroll;
+    }
+
+    .avatar3 {
+        vertical-align: middle;
+        width: 95px;
+        height: 95px;
+        border-radius: 50%;
+        border: solid black 1px;
+    }
+
+    .modal-headerRules {
+        background-color: #FF6B00;
+    }
+</style>
+
+<style>
+  
+.main-section{
+	background-color:#fff;
+}
+.rating-part-left h1{
+	font-size:75px;
+	color: #607d8b;
+}
+.rating-part-left i{
+	font-size:22px;
+	padding:2px;
+	color:#FDC91B;
+}
+.rating-part-left p{
+	font-size:18px;
+	color:#504F55;
+}
+.progress-bar-section{
+	display: inline-block;	
+	text-align: center;
+	margin-right: 15px;
+}
+.progress-bar-section p{
+	color: black;
+}
+.progress-bar-section i{
+	font-size: 20px;
+	color:#FDC91B;
+}
+.progress-bar-vertical{
+	width: 36px;
+	min-height:150px;	
+	padding: 3px;    
+	position: relative;
+	border-radius: 0px;
+  	box-shadow: none;
+  	margin-bottom: 10px;
+}
+.progress-bar{
+  	position: absolute;
+  	bottom: 3px;
+  	width: 30px;
+  	background: #607d8b;
+}
+.rating-part-right i,.review-part-right i{
+	font-size: 20px;
+	padding:4px 0px;
+	color:#FDC91B;
+}
+.rating-part-right span{
+	color:#FF6B00;
+	font-size:17px;
+	padding-left: 5px;
+}
+
+.review-part-left{
+	padding-left:30px;
+}
+.review-part-left img{
+	height:70px;
+	width:70px;
+	border-radius: 50%;
+	border:2px solid #FF6B00;
+}
+.review-part-left p{
+	margin:0px;
+	font-size:17px;
+	color:#B3B5B4;
+}
+.review-part-left span{
+	font-size:19px;
+}
+.review-part-left small{
+	color:#B3B5B4;
+}
+.review-part-right p{
+	font-size: 18px;
+	color:#919191;
+}
+</style>

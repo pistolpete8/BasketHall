@@ -1,0 +1,135 @@
+﻿@model KosSala.Models.Sala
+
+@{
+    ViewBag.Title = "ListaSala";
+    Layout = "~/Views/Shared/_LayoutAdministrator.cshtml";
+}
+
+<h2>ListaSala</h2>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <link href="~/Content/Datatables/jquery.dataTables.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="~/Content/Datatables/jquery.dataTables.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+
+    <script src="~/Content/DatePicker/notify.min.js"></script>
+    <script src="~/Content/DatePicker/jquery.datetimepicker.full.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+
+
+</head>
+<body>
+    <<div class="container">
+        <div class="card border-0 shadow my-5">
+            <div class="card-body p-5 ">
+
+                <h3> Sve sportske sale </h3>
+                <hr />
+                <table id="myTablee" class=" display  table-responsive table " style="width:100%">
+                    <thead class="thead-dark ">
+                        <tr>
+
+                            <th>Naziv</th>
+                            <th>Lokacija</th>
+                            <th>Rejting</th>
+                            <th>Ime Upravnika</th>
+                            <th>Prezime Upravnika</th>
+
+
+                        </tr>
+                    </thead>
+                    <tfoot class="thead-dark">
+                        <tr>
+
+                            <th>Naziv</th>
+                            <th>Lokacija</th>
+                            <th>Rejting</th>
+                            <th>Ime Upravnika</th>
+                            <th>Prezime Upravnika</th>
+
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<!--Obican izgled tabele:     //cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet  -->
+
+
+
+
+@section scripts{
+
+
+    <script>
+        var Popup, table, pom, pom1;
+        $(document).ready(function () {
+            table = $('#myTablee').DataTable({
+
+                "ajax": {
+                    "url": "/Administrator/PribaviSale",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+
+                "columns": [
+
+                    { "data": "Naziv", "autoWidth": true },
+                    {
+                        "data": "Lokacija", "autoWidth": true
+                    },
+                    { "data": "Rejting", "render": function (data, type, full) { return data.toString().match(/\d+(\.\d{1,2})?/g)[0]; } },
+                    { "data": "UpravnikIme", "autoWidth": true },
+                    { "data": "UpravnikPrezime", "autoWidth": true },
+                    
+
+
+                ], "order": [[1, 'asc']], "language": { "emptyTable": "Trenutno nema podataka" }
+
+
+            });
+
+        });
+
+
+
+
+
+
+    </script>
+    <div class="modal fade" id="ObrisiSalu" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+<style>
+    .table td {
+        vertical-align: middle;
+        font-size: 15px;
+        font-family: Bahnschrift;
+    }
+</style>
+

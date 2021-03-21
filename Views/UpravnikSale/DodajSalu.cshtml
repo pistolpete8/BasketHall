@@ -1,0 +1,95 @@
+﻿@model KosSala.Models.Sala
+
+@{
+    ViewBag.Title = "DodajSalu";
+    Layout = "~/Views/Shared/_LayoutUS.cshtml";
+}
+
+<h2>DodajSalu</h2>
+
+<body>
+    <div class="container">
+        <div class="card border-0 shadow my-5">
+            <div class="card-body p-5">
+                @using (Html.BeginForm("DodajSalu", "UpravnikSale", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <h4>Nova sala:</h4>
+                        <hr />
+                        
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Naziv, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Naziv, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Naziv, "", new { @class = "text-danger" })
+                                
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Lokacija, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Lokacija, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Lokacija, "", new { @class = "text-danger" })
+                                
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Opis, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Opis, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Opis, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Slika, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <input type="file" id="fileUpload" name="slika" accept=".png,.jpg,.jpeg,.gif,.tif" /> 
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Dodaj salu" id="dugme" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+                }
+               
+            <div>
+                
+                @Html.ActionLink("Početna", "UpravnikSaleSignedUp", "UpravnikSale", null, new { @class = "nav item btn btn-primary fa fa-home" })
+
+            </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+
+<script>
+    $(document).ready(function () {
+        $('#dugme').attr('disabled', 'disabled');
+
+        $('#Naziv').change(function () {
+            if ($(this).val() != '') {
+                $('#dugme').removeAttr('disabled');
+            }
+            else {
+                $('#dugme').attr('disabled', 'disabled');
+            }
+        });
+    });
+        
+    
+</script>
+
+
